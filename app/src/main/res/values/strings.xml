@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">vivian</string>
+    <string name="iniciar_sesion">Incia Sesión</string>
+    <string name="correo">Correo</string>
+    <string name="clave">Clave</string>
+    <string name="boton_login_ingresar">Ingresar</string>
+    <string name="logo_vivian">Logo vivian</string>
 </resources>
