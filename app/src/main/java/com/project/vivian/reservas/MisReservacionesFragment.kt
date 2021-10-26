@@ -1,5 +1,9 @@
 package com.project.vivian.reservas
 
+import android.app.Activity
+import android.app.DatePickerDialog
+import android.app.ProgressDialog
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
+import com.project.vivian.MainActivity
 import com.project.vivian.R
 import com.project.vivian.model.Reserva
 import kotlinx.android.synthetic.main.fragment_mis_reservaciones.*
@@ -21,19 +26,44 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener 
     private val myRef : DatabaseReference = database.getReference("reserva")
     var listReservas = ArrayList<Reserva>();
 
+    private lateinit var progressDialog: ProgressDialog
+
     companion object{
         fun newInstance() : MisReservacionesFragment = MisReservacionesFragment()
+
+        class MyTask(private val fragment : MisReservacionesFragment) : AsyncTask<Void, Void, Void>(){
+            override fun doInBackground(vararg p0: Void?): Void? {
+                return null
+            }
+
+            override fun onPreExecute() {
+                fragment.progressDialog.show()
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        progressDialog = ProgressDialog(this.requireActivity())
+        progressDialog.progress = 10
+        progressDialog.max = 100
+        progressDialog.setMessage("Loading...")
+        MyTask(this).execute()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.fragment_mis_reservaciones, container,false)
+    ): View? {
+        return inflater.inflate(R.layout.fragment_mis_reservaciones, container,false)
+
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         myRef.addValueEventListener(reservaListener)
     }
@@ -65,18 +95,12 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener 
                 layoutManager = GridLayoutManager(context,2)
                 adapter = MisReservacionesAdapter(listReservas)
             }
+            progressDialog.dismiss()
         }
         override fun onCancelled(databaseError: DatabaseError) {
             // Getting Post failed, log a message
             Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
         }
     }
-
-    /*fun loadData(){
-        recyclerReservas.apply {
-            layoutManager = GridLayoutManager(context, 2)
-            adapter = MisReservacionesAdapter(listReservas)
-        }
-    }*/
 
 }

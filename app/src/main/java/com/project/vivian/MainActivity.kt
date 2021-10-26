@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
             val email=login_correo.text.toString()
             val pass=login_clave.text.toString()
 
-            if (email=="adrian" && pass=="123"){
+            if (email=="admin" && pass=="123"){
 
                 finish()
                 startActivity(Intent(this, MenuActivity::class.java))
