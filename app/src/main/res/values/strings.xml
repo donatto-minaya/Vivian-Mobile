@@ -1,8 +1,36 @@
 <resources>
-    <string name="app_name">vivian</string>
-    <string name="iniciar_sesion">Inicia Sesión p loco y come con nosotros</string>
+    <string name="app_name">Vivian</string>
+    <string name="app_correo">vivian.support@vivian.pe</string>
+    <string name="iniciar_sesion">Inicia Sesión</string>
     <string name="correo">Correo</string>
     <string name="clave">Clave</string>
     <string name="boton_login_ingresar">Ingresar</string>
     <string name="logo_vivian">Logo vivian</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="dialog_title">Confirmación</string>
+
+    <!-- Bottom Menu -->
+    <string name="nav_home">Home</string>
+    <string name="nav_reservar">Reservar</string>
+    <string name="nav_delivery">Delivery</string>
+
+    <!-- Right Side Bar -->
+    <string name="right_sidebar_cuenta">Cuenta</string>
+    <string name="right_sidebar_reservaciones">Mis Reservaciones</string>
+    <string name="right_sidebar_configuracion">Configuración</string>
+    <string name="right_sidebar_logout">Cerrar Sesión</string>
+    <string name="right_sidebar_open">Open</string>
+    <string name="right_sidebar_close">Close</string>
+
+
+    <!-- Fragment Reservar -->
+    <string name="title_reservar">Deseas reservar para una fecha especial? Ahora es el momento.</string>
+    <string name="i_nombre_reservar">Nombre</string>
+    <string name="i_dni_reservar">DNI</string>
+    <string name="i_fecha_reservar">Fecha de reservación</string>
+    <string name="btn_solicitar_reservar">Solicitar</string>
+
+    <!-- Fragment Mis Reservaciones -->
+    <string name="title_mis_reservaciones">Mis Reservaciones</string>
+
 </resources>

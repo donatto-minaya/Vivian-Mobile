@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MaterialCalendarTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="android:colorAccent">@color/default_pink</item>
+        <item name="android:colorPrimary">@color/default_pink</item>
+        <!-- Buttons -->
+        <item name="buttonBarPositiveButtonStyle">@style/TextButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/TextButton</item>
+        <!-- Icono de seleccionar -->
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <item name="android:colorControlActivated">@color/default_pink</item>
+    </style>
+
+    <!-- Color para los botones del DatePicker -->
+    <style name="TextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/default_pink</item>
+        <item name="backgroundTint">@color/default_pink</item>
+    </style>
+
+
+</resources>

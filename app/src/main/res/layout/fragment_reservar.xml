@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <!-- Here you put the rest of your current view-->
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_reservar"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/i_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/textTitle"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/custom_input"
+            android:hint="@string/i_nombre_reservar"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:textColor="@android:color/black"
+            android:textCursorDrawable="@drawable/custom_cursor" />
+
+        <EditText
+            android:id="@+id/i_dni"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/i_nombre"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_input"
+            android:hint="@string/i_dni_reservar"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:textColor="@android:color/black"
+            android:textCursorDrawable="@drawable/custom_cursor" />
+
+        <EditText
+            android:id="@+id/i_fecha_reservacion"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/i_dni"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_input"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="@string/i_fecha_reservar"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:textColor="@android:color/black"
+            android:textCursorDrawable="@drawable/custom_cursor" />
+
+        <Spinner
+            android:id="@+id/spMesa"
+            style="@android:style/Widget.Material.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/i_fecha_reservacion"
+            android:layout_marginTop="20dp"/>
+
+        <Spinner
+            android:id="@+id/spTurno"
+            style="@android:style/Widget.Material.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/spMesa"
+            android:layout_marginTop="20dp"
+            />
+
+        <Button
+            android:id="@+id/btnSolicitar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/spTurno"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/default_pink_button"
+            android:text="@string/btn_solicitar_reservar"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/btnSolicitar"
+            android:backgroundTint="@color/red_cancelar"
+            android:text="@string/btn_cancelar"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</ScrollView>
