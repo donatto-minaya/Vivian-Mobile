@@ -29,6 +29,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
+
+
+
 class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     var listMesas = arrayOf(1,2,3,4,5)
@@ -83,28 +86,14 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
             myRef.child(myRef.push().key.toString()).setValue(reserva)
         }*/
 
-        /*myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                val mesas = dataSnapshot.value as ArrayList<*>
-                for (mesa in mesas) {
-                    Log.d("PRUEBA", "Value is: $mesa")
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w("PRUEBA", "Failed to read value.", error.toException())
-            }
-        })*/
 
         btnSolicitar.setOnClickListener {
             val nombre = i_nombre.text.toString()
+            val dni = i_dni.text.toString()
             val fecha = i_fecha_reservacion.text.toString()
             val mesa = listMesas[spMesa.selectedItemPosition].toString()
             val turno = listTurnos[spTurno.selectedItemPosition]
-            val dni = i_dni.text.toString()
+
 
             Log.v("FORMULARIO_CURSO",nombre)
             Log.v("FORMULARIO_CURSO",dni)
@@ -113,6 +102,8 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
             Log.v("FORMULARIO_CURSO",turno)
 
             if (nombre.isNotEmpty() && fecha.isNotEmpty() && mesa.isNotEmpty() && turno.isNotEmpty()){
+                val reservaObj = Reserva(nombre,dni,fecha,mesa.toInt(),turno)
+                agregarReservacion(reservaObj)
                 val fragment = MisReservacionesFragment.newInstance()
                 openFragment(fragment)
             }else{
@@ -121,8 +112,8 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    fun agregarReservacion(){
-
+    fun agregarReservacion(reserva: Reserva){
+        myRef.child(myRef.push().key.toString()).setValue(reserva)
     }
 
     fun showDatePickerDialog() {
