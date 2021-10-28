@@ -2,12 +2,21 @@
     <string name="app_name">Vivian</string>
     <string name="app_correo">vivian.support@vivian.pe</string>
     <string name="iniciar_sesion">Inicia Sesión</string>
+    <string name="registrate">Registrate</string>
     <string name="correo">Correo</string>
     <string name="clave">Clave</string>
     <string name="boton_login_ingresar">Ingresar</string>
+    <string name="boton_login_registrar">Registrar</string>
     <string name="logo_vivian">Logo vivian</string>
+    <string name="logo_go_back">Go back</string>
     <string name="btn_cancelar">Cancelar</string>
     <string name="dialog_title">Confirmación</string>
+    <string name="all">TODO</string>
+    <!-- Account -->
+    <string name="logo_background">Logo background</string>
+    <string name="update_profile">Guardar</string>
+    <string name="change_password">Cambiar contraseña</string>
+    <string name="delete_account">Eliminar cuenta</string>
 
     <!-- Bottom Menu -->
     <string name="nav_home">Home</string>

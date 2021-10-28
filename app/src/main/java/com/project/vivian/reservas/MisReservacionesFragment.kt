@@ -43,7 +43,7 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener 
         progressDialog = ProgressDialog(this.requireActivity())
         progressDialog.progress = 10
         progressDialog.max = 100
-        progressDialog.setMessage("Loading...")
+        progressDialog.setMessage("Cargando...")
         MyTask(this).execute()
     }
 
@@ -51,10 +51,10 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener 
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_mis_reservaciones, container,false)
+    ): View? =
+        inflater.inflate(R.layout.fragment_mis_reservaciones, container,false)
 
-    }
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

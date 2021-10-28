@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.project.vivian.home.HomeFragment
 import com.project.vivian.model.Reserva
+import kotlinx.android.synthetic.main.item_reserva.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -72,19 +73,6 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         spMesa.adapter = arrayMesasAdapter
         spTurno.adapter = arrayTurnosAdapter
-
-
-        val nReservas = listOf(
-            Reserva("Adrian Arcelles","12345678","20/10/2021",1,"Mañana"),
-            Reserva("Cristobal Colon","76575856","01/05/2021",2,"Tarde"),
-            Reserva("Adolf Hitler","34578456","07/12/2021",3,"Noche"),
-            Reserva("Juan Vargas","78568457","04/01/2021",4,"Mañana")
-        )
-
-        // INGRESÉ RESERVAS DE PRUEBA
-        /*for (reserva in nReservas){
-            myRef.child(myRef.push().key.toString()).setValue(reserva)
-        }*/
 
 
         btnSolicitar.setOnClickListener {

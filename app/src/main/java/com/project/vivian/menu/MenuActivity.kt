@@ -1,6 +1,7 @@
 package com.project.vivian.menu
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
@@ -9,7 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
+import com.project.vivian.MainActivity
 import com.project.vivian.R
+import com.project.vivian.cuenta.CuentaFragment
 import com.project.vivian.home.HomeFragment
 import com.project.vivian.reservas.MisReservacionesFragment
 import com.project.vivian.reservas.ReservasFragment
@@ -20,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_reservar.*
 class MenuActivity : AppCompatActivity() {
 
     lateinit var toggle : ActionBarDrawerToggle
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,16 +40,26 @@ class MenuActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        auth = FirebaseAuth.getInstance()
+
         sidebar_view.setNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.nav_cuenta -> Toast.makeText(applicationContext,"Clicked cuenta",Toast.LENGTH_SHORT).show()
+                R.id.nav_cuenta -> {
+                    val fragment = CuentaFragment.newInstance()
+                    openFragment(fragment)
+                    drawerLayout.closeDrawers()
+                }
                 R.id.nav_reservaciones -> {
                     val fragment = MisReservacionesFragment.newInstance()
                     openFragment(fragment)
                     drawerLayout.closeDrawers()
                 }
                 R.id.nav_settings -> Toast.makeText(applicationContext,"Clicked configuracion",Toast.LENGTH_SHORT).show()
-                R.id.nav_logout -> Toast.makeText(applicationContext,"Clicked cerrar sesion",Toast.LENGTH_SHORT).show()
+                R.id.nav_logout -> {
+                    auth.signOut()
+                    finish()
+                    startActivity(Intent(this, MainActivity::class.java))
+                }
             }
             true
         }
