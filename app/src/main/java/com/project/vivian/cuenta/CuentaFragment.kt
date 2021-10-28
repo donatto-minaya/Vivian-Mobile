@@ -104,6 +104,7 @@ class CuentaFragment: Fragment(), AdapterView.OnItemSelectedListener {
                 val myObject : Usuario? = dataSnapshot.child(currentUser.uid).getValue(Usuario::class.java)
                 if (myObject != null) {
                     myObject.key = currentUser.uid
+                    emailCuentaTextView.setText(currentUser.email)
                     nameEditText.setText(myObject.nombres)
                     apellidosEditText.setText(myObject.apellidos)
                     dniEditText.setText(myObject.dni)

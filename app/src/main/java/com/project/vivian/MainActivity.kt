@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.project.vivian.menu.MenuActivity
+import com.project.vivian.model.Mesa
 import com.project.vivian.model.Usuario
 import com.project.vivian.reservas.MisReservacionesFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,8 +23,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var progressDialog: ProgressDialog
 
-    private val database = FirebaseDatabase.getInstance()
-    private val myRef : DatabaseReference = database.getReference("usuario")
+    //private val database = FirebaseDatabase.getInstance()
+    //private val myRef : DatabaseReference = database.getReference("usuario")
+    //private val myRef2 : DatabaseReference = database.getReference("mesa")
 
     companion object{
         class MyTask(private val activity: MainActivity ) : AsyncTask<Void, Void, Void>(){
@@ -48,7 +50,9 @@ class MainActivity : AppCompatActivity() {
         progressDialog.setMessage("Cargando...")
 
         /*val user = Usuario("33333333","Adrian","Arcelles","950489039")
-        myRef.child("sfStWtGWWZheW9fryYoUePs0U0T2").setValue(user)*/
+        myRef.child("sfStWtGWWZheW9fryYoUePs0U0T2").setValue(user)
+        var mesa = Mesa(3,true)
+        myRef2.child(myRef2.push().key.toString()).setValue(mesa)*/
 
         button_login.setOnClickListener{
             val email=login_correo.text.toString()
@@ -68,9 +72,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
         val currentUser = auth.currentUser
-
         if(currentUser != null){
             reload();
         }
@@ -87,7 +89,6 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, "Correo o contraseña incorrectos.", Toast.LENGTH_SHORT).show()
                 }
             }
-        // [END sign_in_with_email]
     }
 
     private fun reload(){

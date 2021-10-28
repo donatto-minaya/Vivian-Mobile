@@ -83,7 +83,7 @@
             android:layout_below="@+id/spTurno"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/default_pink_button"
-            android:text="@string/btn_solicitar_reservar"
+            android:text="@string/btn_reservar_solicitar"
             android:textColor="@color/white"
             android:textSize="18sp" />
         <Button

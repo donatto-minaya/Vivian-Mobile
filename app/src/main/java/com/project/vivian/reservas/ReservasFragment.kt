@@ -1,7 +1,9 @@
 package com.project.vivian.reservas
 
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.content.ContentValues.TAG
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,14 +17,10 @@ import com.project.vivian.model.Mesa
 import com.project.vivian.ui.DatePickerFragment
 import kotlinx.android.synthetic.main.fragment_reservar.*
 import android.widget.ArrayAdapter
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.initialize
-import com.google.firebase.database.DatabaseError
 
-import com.google.firebase.database.DataSnapshot
 import com.project.vivian.home.HomeFragment
 import com.project.vivian.model.Reserva
 import kotlinx.android.synthetic.main.item_reserva.*
@@ -35,35 +33,100 @@ import kotlin.collections.ArrayList
 
 class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
-    var listMesas = arrayOf(1,2,3,4,5)
     var listTurnos = arrayOf("Mañana","Tarde","Noche")
 
+    var nombreCliente : String = ""
+    var dni : String = ""
+    var fecha : String = ""
+    var mesa : String = ""
+    var turno : String = ""
+    var idActualizar : Int = 0
+
+    /*args.putString("nombresSend",reservaSelected.nombreCliente)
+    args.putString("apellidosSend",reservaSelected.dni)
+    args.putString("fechaSend",reservaSelected.fecha)
+    args.putString("mesaSend",reservaSelected.mesa.toString())
+    args.putString("turnoSend",reservaSelected.turno)
+    args.putString("idSend",reservaSelected.key)*/
+
     private val database = FirebaseDatabase.getInstance()
-    private val myRef : DatabaseReference = database.getReference("reserva")
+    private val myRefReserva : DatabaseReference = database.getReference("reserva")
+    private val myRefMesa : DatabaseReference = database.getReference("mesa")
+
+
+    var listMesasDisponibles = ArrayList<Mesa>();
+
+    private lateinit var reservaActualizar : Reserva
+    private lateinit var progressDialog: ProgressDialog
+    var listMesasSpinner : ArrayList<Int> = ArrayList()
 
     companion object{
         fun newInstance() : ReservasFragment = ReservasFragment()
+
+        class MyTask(private val fragment : ReservasFragment) : AsyncTask<Void, Void, Void>(){
+            override fun doInBackground(vararg p0: Void?): Void? {
+                return null
+            }
+
+            override fun onPreExecute() {
+                fragment.progressDialog.show()
+            }
+        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.fragment_reservar,container,false)
+    ): View? {
+        progressDialog = ProgressDialog(this.requireActivity())
+        progressDialog.progress = 10
+        progressDialog.max = 100
+        progressDialog.setMessage("Cargando...")
+        MyTask(this).execute()
+        return inflater.inflate(R.layout.fragment_reservar,container,false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var vargs = arguments
+        if (vargs != null){
+            reservaActualizar = Reserva(
+                vargs?.getString("nombresSend").toString(),
+                vargs?.getString("apellidosSend").toString(),
+                vargs?.getString("fechaSend").toString(),
+                vargs?.getString("mesaSend").toString().toInt(),
+                vargs?.getString("turnoSend").toString(),
+                vargs?.getString("idSend").toString()
+            )
+            textTitle.setText(R.string.title_reservar_modificar)
+            i_nombre.setText(reservaActualizar.nombreCliente)
+            i_dni.setText(reservaActualizar.dni)
+            i_fecha_reservacion.setText(reservaActualizar.fecha)
+            btnSolicitar.setText(R.string.btn_reservar_modificar)
+            btnCancelar.setOnClickListener {
+                val fragment = MisReservacionesFragment()
+                openFragment(fragment)
+            }
+            when(reservaActualizar.turno){
+                "Mañana" -> spTurno.post(Runnable { spTurno.setSelection(0) })
+                "Tarde" -> spTurno.post(Runnable { spTurno.setSelection(1) })
+                else -> spTurno.post(Runnable { spTurno.setSelection(2) })
+            }
+        }
+
 
         i_fecha_reservacion.setOnClickListener {
             showDatePickerDialog()
         }
 
-        val arrayMesasAdapter: ArrayAdapter<Int> = ArrayAdapter<Int>(
+        /*val arrayMesasAdapter: ArrayAdapter<Int> = ArrayAdapter<Int>(
             requireActivity().baseContext,
             android.R.layout.simple_spinner_dropdown_item,
             listMesas
-        )
+        )*/
+        mesasDisponibles()
 
         val arrayTurnosAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
             requireActivity().baseContext,
@@ -71,25 +134,16 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
             listTurnos
         )
 
-        spMesa.adapter = arrayMesasAdapter
         spTurno.adapter = arrayTurnosAdapter
-
 
         btnSolicitar.setOnClickListener {
             val nombre = i_nombre.text.toString()
             val dni = i_dni.text.toString()
             val fecha = i_fecha_reservacion.text.toString()
-            val mesa = listMesas[spMesa.selectedItemPosition].toString()
+            val mesa = listMesasSpinner[spMesa.selectedItemPosition]
             val turno = listTurnos[spTurno.selectedItemPosition]
 
-
-            Log.v("FORMULARIO_CURSO",nombre)
-            Log.v("FORMULARIO_CURSO",dni)
-            Log.v("FORMULARIO_CURSO",fecha)
-            Log.v("FORMULARIO_CURSO",mesa)
-            Log.v("FORMULARIO_CURSO",turno)
-
-            if (nombre.isNotEmpty() && fecha.isNotEmpty() && mesa.isNotEmpty() && turno.isNotEmpty()){
+            if (nombre.isNotEmpty() && fecha.isNotEmpty() && turno.isNotEmpty()){
                 val reservaObj = Reserva(nombre,dni,fecha,mesa.toInt(),turno)
                 agregarReservacion(reservaObj)
                 val fragment = MisReservacionesFragment.newInstance()
@@ -101,7 +155,7 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     fun agregarReservacion(reserva: Reserva){
-        myRef.child(myRef.push().key.toString()).setValue(reserva)
+        myRefReserva.child(myRefReserva.push().key.toString()).setValue(reserva)
     }
 
     fun showDatePickerDialog() {
@@ -133,15 +187,50 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
             .setTitle(R.string.dialog_title)
             .setMessage(message)
             .setNegativeButton("Cancelar"){ view, id ->
-                Log.v("ACTION_BUTTON",id.toString())
                 view.dismiss()
             }
-            .setPositiveButton("Aceptar"){ view, id ->
-                Log.v("ACTION_BUTTON",id.toString())
+            .setPositiveButton("OK"){ view, id ->
                 view.dismiss()
             }
             .setCancelable(false) // PARA PERMITIR QUE SE CIERRE LA ALERTA AL DAR CLICK FUERA DE ELLLA: TRUE
         dialog.show()
+    }
+
+    fun mesasDisponibles(){
+        val mesasDisponiblesQuery: Query = myRefMesa.orderByChild("disponible").equalTo(true)
+
+        val listarMesasDisponibles = object : ValueEventListener {
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                dataSnapshot.children.forEach { child ->
+                    val mesa: Mesa? =
+                        Mesa(
+                            child.child("capacidadPersonas").value.toString().toInt(),
+                            child.child("disponible").value.toString().toBoolean(),
+                            child.key
+                        )
+                    if (mesa != null) {
+                        listMesasDisponibles.add(mesa)
+                    }
+                }
+                for (i in listMesasDisponibles){
+                    i.capacidadPersonas?.let { listMesasSpinner.add(it) }
+                }
+                val arrayMesasAdapter: ArrayAdapter<Int> = ArrayAdapter<Int>(
+                    requireActivity().baseContext,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    listMesasSpinner
+                )
+                spMesa?.adapter = arrayMesasAdapter
+                progressDialog.dismiss()
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+
+        mesasDisponiblesQuery.addValueEventListener(listarMesasDisponibles)
+
     }
 
 }

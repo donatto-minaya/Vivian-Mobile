@@ -12,6 +12,13 @@
     <string name="btn_cancelar">Cancelar</string>
     <string name="dialog_title">Confirmación</string>
     <string name="all">TODO</string>
+    <string-array name="your_string_array">
+        <item>Hint...</item>
+        <item>Item1</item>
+        <item>Item2</item>
+        <item>Item3</item>
+    </string-array>
+
     <!-- Account -->
     <string name="logo_background">Logo background</string>
     <string name="update_profile">Guardar</string>
@@ -37,7 +44,10 @@
     <string name="i_nombre_reservar">Nombre</string>
     <string name="i_dni_reservar">DNI</string>
     <string name="i_fecha_reservar">Fecha de reservación</string>
-    <string name="btn_solicitar_reservar">Solicitar</string>
+    <string name="btn_reservar_solicitar">Solicitar</string>
+    <string name="title_reservar_modificar">Puedes modificar tu Reserva en cualquier momento. (Sujeto a disponibilidad)</string>
+    <string name="btn_reservar_modificar">Modificar</string>
+    <string name="text_delete_confirm">¿Deseas Eliminar la Reservación?</string>
 
     <!-- Fragment Mis Reservaciones -->
     <string name="title_mis_reservaciones">Mis Reservaciones</string>

@@ -1,3 +1,5 @@
 package com.project.vivian.model
 
-data class Mesa (val nmesa: String, val capacidadPersonas: Int)
+import com.google.firebase.database.Exclude
+
+data class Mesa (val capacidadPersonas: Int? = 0, val disponible: Boolean? = false, @Exclude val key : String? = null)
