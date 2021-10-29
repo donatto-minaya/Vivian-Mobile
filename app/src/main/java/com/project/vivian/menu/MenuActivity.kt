@@ -1,5 +1,6 @@
 package com.project.vivian.menu
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -56,9 +57,19 @@ class MenuActivity : AppCompatActivity() {
                 }
                 R.id.nav_settings -> Toast.makeText(applicationContext,"Clicked configuracion",Toast.LENGTH_SHORT).show()
                 R.id.nav_logout -> {
-                    auth.signOut()
-                    finish()
-                    startActivity(Intent(this, MainActivity::class.java))
+                    val builder = AlertDialog.Builder(this)
+                    builder.setMessage(R.string.dialog_signout_confirm)
+                        .setCancelable(false)
+                        .setPositiveButton("Si") { dialog, id ->
+                            auth.signOut()
+                            finish()
+                            startActivity(Intent(this, MainActivity::class.java))
+                        }
+                        .setNegativeButton("Cancelar") { dialog, id ->
+                            dialog.dismiss()
+                        }
+                    val alert = builder.create()
+                    alert.show()
                 }
             }
             true

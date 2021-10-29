@@ -8,7 +8,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minHeight="700dp"
+    android:minHeight="725dp"
     android:background="#dde3e7"
     tools:context=".menu.MenuActivity">
 
@@ -58,7 +58,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="159dp"
+            android:layout_height="180dp"
             android:orientation="vertical">
 
             <ImageView
@@ -91,7 +91,7 @@
                 android:layout_marginBottom="40dp"
                 android:gravity="center"
                 android:text="email"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -147,7 +147,8 @@
                     android:hint="Nombres"
                     android:inputType="textPersonName"
                     android:maxLength="40"
-                    android:padding="16dp" />
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/custom_cursor"/>
 
                 <EditText
                     android:id="@+id/apellidosEditText"
@@ -163,7 +164,8 @@
                     android:hint="Apellidos"
                     android:inputType="textPersonName"
                     android:maxLength="40"
-                    android:padding="16dp" />
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/custom_cursor"/>
 
                 <EditText
                     android:id="@+id/dniEditText"
@@ -178,8 +180,9 @@
                     android:ems="10"
                     android:hint="DNI"
                     android:inputType="textPersonName"
-                    android:maxLength="40"
-                    android:padding="16dp" />
+                    android:maxLength="8"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/custom_cursor"/>
 
                 <EditText
                     android:id="@+id/telefonoEditText"
@@ -194,11 +197,12 @@
                     android:ems="10"
                     android:hint="Telefono"
                     android:inputType="textPersonName"
-                    android:maxLength="40"
-                    android:padding="16dp" />
+                    android:maxLength="9"
+                    android:padding="16dp"
+                    android:textCursorDrawable="@drawable/custom_cursor"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/updateProfileAppCompatButton"
+                    android:id="@+id/btn_actualizar_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_gravity="center"

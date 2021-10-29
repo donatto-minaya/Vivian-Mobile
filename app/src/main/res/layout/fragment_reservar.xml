@@ -39,8 +39,8 @@
             android:background="@drawable/custom_input"
             android:hint="@string/i_dni_reservar"
             android:inputType="text"
-            android:paddingStart="20dp"
             android:maxLength="8"
+            android:paddingStart="20dp"
             android:textColor="@android:color/black"
             android:textCursorDrawable="@drawable/custom_cursor" />
 

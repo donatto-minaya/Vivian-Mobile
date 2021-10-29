@@ -1,16 +1,24 @@
 <resources>
     <string name="app_name">Vivian</string>
     <string name="app_correo">vivian.support@vivian.pe</string>
-    <string name="iniciar_sesion">Inicia Sesión</string>
-    <string name="registrate">Registrate</string>
-    <string name="correo">Correo</string>
-    <string name="clave">Clave</string>
-    <string name="boton_login_ingresar">Ingresar</string>
-    <string name="boton_login_registrar">Registrar</string>
     <string name="logo_vivian">Logo vivian</string>
     <string name="logo_go_back">Go back</string>
     <string name="btn_cancelar">Cancelar</string>
     <string name="dialog_title">Confirmación</string>
+
+    <!-- Main Activity -->
+    <string name="title_inicia_sesion">Inicia Sesión</string>
+    <string name="btn_login_ingresar">Ingresar</string>
+    <string name="btn_login_registrar">Registrar</string>
+    <string name="correo">Correo</string>
+    <string name="clave">Clave</string>
+
+    <!-- Registro Activity -->
+    <string name="title_registrate">Registrate</string>
+    <string name="btn_registro_registrar">Registrate</string>
+    <string name="repeat_clave">Repite tu clave</string>
+    <string name="dialong_creado_correctamente">Usuario creado correctamente.</string>
+
     <string name="all">TODO</string>
     <string-array name="your_string_array">
         <item>Hint...</item>
@@ -19,25 +27,23 @@
         <item>Item3</item>
     </string-array>
 
-    <!-- Account -->
-    <string name="logo_background">Logo background</string>
-    <string name="update_profile">Guardar</string>
-    <string name="change_password">Cambiar contraseña</string>
-    <string name="delete_account">Eliminar cuenta</string>
 
     <!-- Bottom Menu -->
     <string name="nav_home">Home</string>
     <string name="nav_reservar">Reservar</string>
     <string name="nav_delivery">Delivery</string>
 
-    <!-- Right Side Bar -->
+    <!-- Left Side Bar -->
     <string name="right_sidebar_cuenta">Cuenta</string>
     <string name="right_sidebar_reservaciones">Mis Reservaciones</string>
     <string name="right_sidebar_configuracion">Configuración</string>
     <string name="right_sidebar_logout">Cerrar Sesión</string>
     <string name="right_sidebar_open">Open</string>
     <string name="right_sidebar_close">Close</string>
+    <string name="dialog_signout_confirm">¿Seguro de Cerrar Sesión?</string>
 
+    <!-- Fragment Home -->
+    <string name="dialog_actualice_datos">Por favor, actualiza tus datos para poder comenzar a utilizar nuestros servicios :D</string>
 
     <!-- Fragment Reservar -->
     <string name="title_reservar">Deseas reservar para una fecha especial? Ahora es el momento.</string>
@@ -51,5 +57,13 @@
 
     <!-- Fragment Mis Reservaciones -->
     <string name="title_mis_reservaciones">Mis Reservaciones</string>
+
+    <!-- Fragment Cuenta -->
+    <string name="logo_background">Logo background</string>
+    <string name="update_profile">Guardar</string>
+    <string name="change_password">Cambiar contraseña</string>
+    <string name="delete_account">Eliminar cuenta</string>
+    <string name="dialog_updateprofile_confirm">¿Seguro de actualizar tu perfil?</string>
+
 
 </resources>

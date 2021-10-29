@@ -68,6 +68,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        button_registrar.setOnClickListener {
+            startActivity(Intent(this,RegistroActivity::class.java))
+        }
+
     }
 
     override fun onStart() {
