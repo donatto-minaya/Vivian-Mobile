@@ -2,7 +2,6 @@ package com.project.vivian.reservas
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.vivian.R
@@ -29,6 +28,6 @@ class MisReservacionesViewHolder(inflater: LayoutInflater, parent: ViewGroup) : 
         textNombreCliente?.text = reserva.nombreCliente
         textFecha?.text = reserva.fecha
         textTurno?.text = reserva.turno
-        textMesa?.text = reserva.mesa.toString()
+        textMesa?.text = reserva.mesa.capacidadPersonas.toString()
     }
 }

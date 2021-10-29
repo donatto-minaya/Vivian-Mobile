@@ -113,11 +113,9 @@ class CuentaFragment: Fragment(), AdapterView.OnItemSelectedListener {
                 }
                 progressDialog.dismiss()
             }
-
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
 
+            }
         }
         myRef.addValueEventListener(usuarioListener)
     }

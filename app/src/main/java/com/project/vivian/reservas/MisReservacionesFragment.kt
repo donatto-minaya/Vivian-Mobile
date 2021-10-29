@@ -15,18 +15,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 import com.project.vivian.R
-import com.project.vivian.home.HomeFragment
 import com.project.vivian.model.Reserva
 import kotlinx.android.synthetic.main.fragment_mis_reservaciones.*
-import android.content.DialogInterface
-
-
+import com.project.vivian.model.Mesa
 
 
 class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener, MisReservacionesAdapter.ItemClickListener {
 
     private val database = FirebaseDatabase.getInstance()
-    private val myRef : DatabaseReference = database.getReference("reserva")
+    private val myRefReserva : DatabaseReference = database.getReference("reserva")
+    private val myRefMesa : DatabaseReference = database.getReference("mesa")
     var listReservas = ArrayList<Reserva>();
 
     private lateinit var progressDialog: ProgressDialog
@@ -87,14 +85,16 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener,
                 listReservas.clear()
                 dataSnapshot.children.forEach { child ->
                     val reserva: Reserva? =
-                        Reserva(
-                            child.child("nombreCliente").value.toString(),
-                            child.child("dni").value.toString(),
-                            child.child("fecha").value.toString(),
-                            child.child("mesa").value.toString().toInt(),
-                            child.child("turno").value.toString(),
-                            child.key
-                        )
+                        child.child("mesa").getValue(Mesa::class.java)?.let {
+                            Reserva(
+                                child.child("nombreCliente").value.toString(),
+                                child.child("dni").value.toString(),
+                                child.child("fecha").value.toString(),
+                                it,
+                                child.child("turno").value.toString(),
+                                child.key
+                            )
+                        }
                     reserva?.let { listReservas.add(it) }
                 }
                 loadData()
@@ -104,7 +104,7 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener,
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
             }
         }
-        myRef.addValueEventListener(listarReservaListener)
+        myRefReserva.addValueEventListener(listarReservaListener)
     }
 
     override fun onItemClickNoteUpdate(reservaSelected: Reserva) {
@@ -113,7 +113,7 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener,
         args.putString("nombresSend",reservaSelected.nombreCliente)
         args.putString("apellidosSend",reservaSelected.dni)
         args.putString("fechaSend",reservaSelected.fecha)
-        args.putString("mesaSend",reservaSelected.mesa.toString())
+        args.putSerializable("mesaSend",reservaSelected.mesa)
         args.putString("turnoSend",reservaSelected.turno)
         args.putString("idSend",reservaSelected.key)
         fragment.arguments = args
@@ -125,7 +125,8 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener,
         builder.setMessage(R.string.text_delete_confirm)
             .setCancelable(false)
             .setPositiveButton("Si") { dialog, id ->
-                myRef.child(reservaSelected.key.toString()).removeValue()
+                myRefMesa.child(reservaSelected.mesa.key.toString()).child("disponible").setValue(true)
+                myRefReserva.child(reservaSelected.key.toString()).removeValue()
                 Toast.makeText(context,"Reserva eliminada correctamente",Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton("Cancelar") { dialog, id ->
