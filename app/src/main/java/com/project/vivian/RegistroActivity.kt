@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Patterns
-import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -14,7 +13,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
-import com.project.vivian.cuenta.CuentaFragment
 import com.project.vivian.menu.MenuActivity
 import kotlinx.android.synthetic.main.activity_registro.*
 import java.util.regex.Pattern
@@ -54,7 +52,7 @@ class RegistroActivity : AppCompatActivity() {
         //(?=.[-@%[}+'!/#$^?:;,(")~`.=&{>]<_]) # a special character must occur at least once replace with your special characters
         //(?=\S+$) # no whitespace allowed in the entire string .{8,} # anything, at least six places though
 
-        goBack.setOnClickListener {
+        registro_goback.setOnClickListener {
             finish()
         }
 

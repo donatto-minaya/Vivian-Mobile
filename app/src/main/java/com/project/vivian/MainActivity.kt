@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.project.vivian.menu.MenuActivity
 import com.project.vivian.model.Mesa
+import com.project.vivian.model.Producto
 import com.project.vivian.model.Usuario
 import com.project.vivian.reservas.MisReservacionesFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var progressDialog: ProgressDialog
 
     //private val database = FirebaseDatabase.getInstance()
-    //private val myRef : DatabaseReference = database.getReference("usuario")
+    //private val myRef : DatabaseReference = database.getReference("producto")
     //private val myRef2 : DatabaseReference = database.getReference("mesa")
 
     companion object{
@@ -44,13 +45,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         auth = Firebase.auth
 
+
         progressDialog = ProgressDialog(this)
         progressDialog.progress = 10
         progressDialog.max = 100
         progressDialog.setMessage("Cargando...")
-
-        /*val user = Usuario("33333333","Adrian","Arcelles","950489039")
-        myRef.child("sfStWtGWWZheW9fryYoUePs0U0T2").setValue(user)
+        /*val prod = Producto("","Ramen","14.99","5")
+        myRef.child(myRef.push().key.toString()).setValue(prod)
         var mesa = Mesa(3,true)
         myRef2.child(myRef2.push().key.toString()).setValue(mesa)*/
 
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 email.isEmpty() || pass.isEmpty() -> {
                     Toast.makeText(baseContext, "Ingrese datos para Iniciar Sesion.", Toast.LENGTH_SHORT).show()
                 } else ->{
-                    MyTask(this).execute()
+                    progressDialog.show()
                     signIn(email, pass)
                 }
             }
@@ -92,6 +93,7 @@ class MainActivity : AppCompatActivity() {
                     Log.w("TAG", "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Correo o contraseña incorrectos.", Toast.LENGTH_SHORT).show()
                 }
+                progressDialog.dismiss()
             }
     }
 
@@ -99,8 +101,6 @@ class MainActivity : AppCompatActivity() {
         progressDialog.dismiss()
         finish()
         startActivity(Intent(this,MenuActivity::class.java))
-
     }
-
 
 }

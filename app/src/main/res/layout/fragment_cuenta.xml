@@ -210,7 +210,7 @@
                     android:background="@drawable/ic_buttom"
                     android:paddingLeft="64dp"
                     android:paddingRight="64dp"
-                    android:text="@string/update_profile"
+                    android:text="@string/btn_update_profile"
                     android:textColor="@color/white" />
 
                 <LinearLayout
@@ -223,7 +223,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/updatePasswordTextView"
+                        android:id="@+id/textCambiarClave"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"

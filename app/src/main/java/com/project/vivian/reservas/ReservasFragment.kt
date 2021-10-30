@@ -25,9 +25,6 @@ import com.project.vivian.model.Reserva
 import kotlin.collections.ArrayList
 
 
-
-
-
 class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     var listTurnos = arrayOf("Mañana","Tarde","Noche")
@@ -208,14 +205,6 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
         newFragment.show(this.requireActivity().supportFragmentManager, "datePicker")
     }
 
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("Not yet implemented")
-    }
-
     fun openFragment(fragment: Fragment) {
         val transaction = this.requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_menu, fragment)
@@ -300,6 +289,14 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
 
         }
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        TODO("Not yet implemented")
     }
 
 }

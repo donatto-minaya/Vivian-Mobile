@@ -12,11 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -28,14 +25,8 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.project.vivian.MainActivity
 import com.project.vivian.R
-import com.project.vivian.databinding.ActivityMainBinding
-import com.project.vivian.databinding.FragmentCuentaBinding
-import com.project.vivian.model.Reserva
 import com.project.vivian.model.Usuario
-import com.project.vivian.reservas.MisReservacionesAdapter
-import com.project.vivian.reservas.MisReservacionesFragment
 import kotlinx.android.synthetic.main.fragment_cuenta.*
-import kotlinx.android.synthetic.main.fragment_mis_reservaciones.*
 import java.util.regex.Pattern
 
 
@@ -83,6 +74,7 @@ class CuentaFragment: Fragment(), AdapterView.OnItemSelectedListener {
         progressDialog.max = 100
         progressDialog.setMessage("Cargando...")
         MyTask(this).execute()
+
     }
 
     override fun onCreateView(
@@ -137,6 +129,11 @@ class CuentaFragment: Fragment(), AdapterView.OnItemSelectedListener {
             val alert = builder.create()
             alert.show()
 
+        }
+
+        textCambiarClave.setOnClickListener {
+            val fragment = CambiarClaveFragment.newInstance()
+            openFragment(fragment)
         }
 
     }
@@ -276,6 +273,12 @@ class CuentaFragment: Fragment(), AdapterView.OnItemSelectedListener {
             .centerCrop()
             .placeholder(R.drawable.anonymous_profile)
             .into(profileImageView)
+    }
+
+    fun openFragment(fragment: Fragment) {
+        val transaction = this.requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_menu, fragment)
+        transaction.commit()
     }
 
 }

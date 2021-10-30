@@ -1,27 +1,25 @@
 package com.project.vivian.menu
 
 import android.app.AlertDialog
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 import com.project.vivian.MainActivity
 import com.project.vivian.R
+import com.project.vivian.SubirImgActivity
 import com.project.vivian.cuenta.CuentaFragment
 import com.project.vivian.home.HomeFragment
+import com.project.vivian.productos.ProductoFragment
 import com.project.vivian.reservas.MisReservacionesFragment
 import com.project.vivian.reservas.ReservasFragment
-import com.project.vivian.ui.DatePickerFragment
 import kotlinx.android.synthetic.main.activity_menu.*
-import kotlinx.android.synthetic.main.fragment_reservar.*
 
 class MenuActivity : AppCompatActivity() {
 
@@ -55,7 +53,10 @@ class MenuActivity : AppCompatActivity() {
                     openFragment(fragment)
                     drawerLayout.closeDrawers()
                 }
-                R.id.nav_settings -> Toast.makeText(applicationContext,"Clicked configuracion",Toast.LENGTH_SHORT).show()
+                R.id.nav_settings -> {
+                    startActivity(Intent(this,SubirImgActivity::class.java))
+
+                }
                 R.id.nav_logout -> {
                     val builder = AlertDialog.Builder(this)
                     builder.setMessage(R.string.dialog_signout_confirm)
@@ -89,6 +90,8 @@ class MenuActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigationDelivery -> {
+                    val fragment = ProductoFragment.newInstance()
+                    openFragment(fragment)
                     true
                 }
                 else -> false
@@ -97,6 +100,11 @@ class MenuActivity : AppCompatActivity() {
         nav_view.selectedItemId = R.id.navigationHome
 
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.top_actionbar_menu, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

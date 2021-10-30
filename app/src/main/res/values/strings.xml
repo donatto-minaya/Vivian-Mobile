@@ -50,7 +50,7 @@
     <string name="i_nombre_reservar">Nombre</string>
     <string name="i_dni_reservar">DNI</string>
     <string name="i_fecha_reservar">Fecha de reservación</string>
-    <string name="btn_reservar_solicitar">Solicitar</string>
+    <string name="btn_reservar_reservar">Reservar</string>
     <string name="title_reservar_modificar">Puedes modificar tu Reserva en cualquier momento. (Sujeto a disponibilidad)</string>
     <string name="btn_reservar_modificar">Modificar</string>
     <string name="text_delete_confirm">¿Deseas Eliminar la Reservación?</string>
@@ -60,10 +60,23 @@
 
     <!-- Fragment Cuenta -->
     <string name="logo_background">Logo background</string>
-    <string name="update_profile">Guardar</string>
-    <string name="change_password">Cambiar contraseña</string>
+    <string name="btn_update_profile">Guardar</string>
+    <string name="change_password">Cambiar clave</string>
     <string name="delete_account">Eliminar cuenta</string>
     <string name="dialog_updateprofile_confirm">¿Seguro de actualizar tu perfil?</string>
+    <!-- Fragment Cambiar Clave -->
+    <string name="title_cambiar_clave">Cambio de clave</string>
+    <string name="parrafo_cambiar_clave">Por motivos de seguridad para cambiar tu clave, primero debes ingresar tu clave actual.</string>
+    <string name="cambiarclave_claveactual">Clave actual</string>
+    <string name="cambiarclave_nuevaclave">Nueva clave</string>
+    <string name="cambiarclave_repiteclave">Repite tu nueva clave</string>
+
+
+    <!-- Fragment Delivery -->
+    <string name="title_producto">Los mejores platos en Vivian</string>
+    <string name="precio_producto">Precio: S/</string>
+    <string name="cantidad_producto">Cantidad:</string>
+
 
 
 </resources>

@@ -15,7 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title_reservar"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/i_nombre"
@@ -83,7 +84,7 @@
             android:layout_below="@+id/spTurno"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/default_pink_button"
-            android:text="@string/btn_reservar_solicitar"
+            android:text="@string/btn_reservar_reservar"
             android:textColor="@color/white"
             android:textSize="18sp" />
         <Button

@@ -63,7 +63,6 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //reservaRepository.listarReservasFirebase()
         listReservas.clear()
         setupRecyclerView(recyclerReservas)
 
