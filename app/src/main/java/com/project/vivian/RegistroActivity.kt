@@ -65,7 +65,7 @@ class RegistroActivity : AppCompatActivity() {
                 Toast.makeText(this, "Ingrese un email válido",
                     Toast.LENGTH_SHORT).show()
             } else if (mPassword.isEmpty() || !passwordRegex.matcher(mPassword).matches()){
-                Toast.makeText(this, "Contreseña débil. Al menos un caracter Mayúscula, uno Minúscula y un dígito",
+                Toast.makeText(this, "Contreseña débil. Al menos un caracter Mayúscula, uno Minúscula, un dígito y 6 caracteres",
                     Toast.LENGTH_LONG).show()
             } else if (mPassword != mRepeatPassword){
                 Toast.makeText(this, "Las contraseñas no coinciden",

@@ -95,6 +95,7 @@ class CuentaFragment: Fragment(), AdapterView.OnItemSelectedListener {
         auth = Firebase.auth
         usuarioEncontrado = Usuario()
         updateUI()
+        currentUser = auth.currentUser!!
 
         btn_actualizar_profile.setOnClickListener {
             val builder = AlertDialog.Builder(this.requireContext())
@@ -138,7 +139,7 @@ class CuentaFragment: Fragment(), AdapterView.OnItemSelectedListener {
 
     }
 
-    private  fun updateProfile () {
+    private  fun updateProfile() {
         val dniRegex = Pattern.compile("^(^[0-9]*\$)")
         val nombresApellidosRegex = Pattern.compile("^[A-Za-z\\s]+\$")
         val nombres = nameEditText.text.toString()
@@ -272,6 +273,7 @@ class CuentaFragment: Fragment(), AdapterView.OnItemSelectedListener {
             .load(currentUser.photoUrl)
             .centerCrop()
             .placeholder(R.drawable.anonymous_profile)
+            .error(R.drawable.anonymous_profile)
             .into(profileImageView)
     }
 

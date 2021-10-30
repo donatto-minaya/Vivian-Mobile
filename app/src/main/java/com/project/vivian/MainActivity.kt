@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var progressDialog: ProgressDialog
 
     //private val database = FirebaseDatabase.getInstance()
-    //private val myRef : DatabaseReference = database.getReference("producto")
+    //private val myRef : DatabaseReference = database.getReference("usuario")
     //private val myRef2 : DatabaseReference = database.getReference("mesa")
 
     companion object{
@@ -50,8 +50,9 @@ class MainActivity : AppCompatActivity() {
         progressDialog.progress = 10
         progressDialog.max = 100
         progressDialog.setMessage("Cargando...")
-        /*val prod = Producto("","Ramen","14.99","5")
-        myRef.child(myRef.push().key.toString()).setValue(prod)
+
+        /*val usu = Usuario("asdasd","Ramen","14.99","5")
+        myRef.child("sfStWtGWWZheW9fryYoUePs0U0T2").setValue(usu)
         var mesa = Mesa(3,true)
         myRef2.child(myRef2.push().key.toString()).setValue(mesa)*/
 

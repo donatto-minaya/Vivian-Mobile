@@ -15,14 +15,21 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.project.vivian.R
+import com.project.vivian.cuenta.CuentaFragment
+import com.project.vivian.home.HomeFragment
 import com.project.vivian.model.Mesa
 import com.project.vivian.model.Producto
 import com.project.vivian.model.Reserva
+import com.project.vivian.model.Usuario
 import com.project.vivian.reservas.MisReservacionesAdapter
 import com.project.vivian.reservas.MisReservacionesFragment
 import kotlinx.android.synthetic.main.fragment_delivery.*
@@ -34,9 +41,12 @@ class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, MisRes
 
     private val database = FirebaseDatabase.getInstance()
     private val myRefProducto : DatabaseReference = database.getReference("producto")
+    private val myRefUsuario : DatabaseReference = database.getReference("usuario")
 
     var listProductos = ArrayList<Producto>();
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var currentUser : FirebaseUser
     private lateinit var progressDialog: ProgressDialog
 
     companion object {
@@ -52,6 +62,11 @@ class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, MisRes
             }
         }
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        validarUsuario()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,8 +89,42 @@ class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, MisRes
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        auth = Firebase.auth
+        currentUser = auth.currentUser!!
         listProductos.clear()
         setupRecyclerView(recyclerProductos)
+    }
+
+    fun validarUsuario(){
+        val usuarioListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val myObject : Usuario? = dataSnapshot.child(currentUser.uid).getValue(Usuario::class.java)
+                if (myObject != null) {
+                    if (myObject.nombres != ""){
+                        return
+                    } else {
+                        if (context != null){
+                            val builder = android.app.AlertDialog.Builder(context)
+                            builder.setMessage(R.string.dialog_actualice_datos)
+                                .setCancelable(false)
+                                .setPositiveButton("Actualizar Ahora") { dialog, id ->
+                                    val fragment = CuentaFragment.newInstance()
+                                    openFragment(fragment)
+                                }
+                                .setNegativeButton("Cancelar"){ dialog, id ->
+                                    val fragment = HomeFragment.newInstance()
+                                    openFragment(fragment)
+                                }
+                            val alert = builder.create()
+                            alert.show()
+                        }
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        }
+        myRefUsuario.addValueEventListener(usuarioListener)
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView){
@@ -124,6 +173,12 @@ class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, MisRes
 
     override fun onItemClickNoteDelete(reservaSelected: Reserva) {
         TODO("Not yet implemented")
+    }
+
+    fun openFragment(fragment: Fragment) {
+        val transaction = this.requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_menu, fragment)
+        transaction.commit()
     }
 
 

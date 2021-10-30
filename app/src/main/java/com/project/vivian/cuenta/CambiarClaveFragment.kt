@@ -62,7 +62,7 @@ class CambiarClaveFragment : Fragment() {
             val repeatPassword = textNuevaClaveRepeat.text.toString()
 
             if (newPassword.isEmpty() || !passwordRegex.matcher(newPassword).matches()){
-                Toast.makeText(this.requireContext(), "Contreseña débil. Al menos un caracter Mayúscula, uno Minúscula y un dígito", Toast.LENGTH_LONG).show()
+                Toast.makeText(this.requireContext(), "Contreseña débil. Al menos un caracter Mayúscula, uno Minúscula, un dígito y 6 caracteres", Toast.LENGTH_LONG).show()
             } else if (newPassword != repeatPassword){
                 Toast.makeText(this.requireContext(), "Las contraseñas no coinciden.", Toast.LENGTH_LONG).show()
             } else {

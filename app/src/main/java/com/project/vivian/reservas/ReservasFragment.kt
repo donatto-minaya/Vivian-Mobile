@@ -18,30 +18,37 @@ import com.project.vivian.ui.DatePickerFragment
 import kotlinx.android.synthetic.main.fragment_reservar.*
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
+import com.project.vivian.cuenta.CuentaFragment
 
 import com.project.vivian.home.HomeFragment
 import com.project.vivian.model.Reserva
+import com.project.vivian.model.Usuario
 import kotlin.collections.ArrayList
 
 
 class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
-    var listTurnos = arrayOf("Mañana","Tarde","Noche")
-
     private val database = FirebaseDatabase.getInstance()
     private val myRefReserva : DatabaseReference = database.getReference("reserva")
     private val myRefMesa : DatabaseReference = database.getReference("mesa")
-    var mesaAgregar : Mesa = Mesa()
-    var listMesasDisponibles = ArrayList<Mesa>();
+    private val myRefUsuario : DatabaseReference = database.getReference("usuario")
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var currentUser : FirebaseUser
     private lateinit var reservaActualizar : Reserva
     private lateinit var progressDialog: ProgressDialog
     private lateinit var idMesaFromSpinner : String
 
     var listCantidadPersonasSpinner : ArrayList<String> = ArrayList()
     var listIdMesaSpinner : ArrayList<String> = ArrayList()
-
+    var mesaAgregar : Mesa = Mesa()
+    var listMesasDisponibles = ArrayList<Mesa>();
+    var listTurnos = arrayOf("Mañana","Tarde","Noche")
 
     companion object{
         fun newInstance() : ReservasFragment = ReservasFragment()
@@ -56,6 +63,44 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        validarUsuario()
+    }
+
+    fun validarUsuario(){
+        val usuarioListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val myObject : Usuario? = dataSnapshot.child(currentUser.uid).getValue(Usuario::class.java)
+                if (myObject != null) {
+                    if (myObject.nombres != ""){
+                        return
+                    } else {
+                        if (context != null){
+                            val builder = android.app.AlertDialog.Builder(context)
+                            builder.setMessage(R.string.dialog_actualice_datos)
+                                .setCancelable(false)
+                                .setPositiveButton("Actualizar Ahora") { dialog, id ->
+                                    val fragment = CuentaFragment.newInstance()
+                                    openFragment(fragment)
+                                }
+                                .setNegativeButton("Cancelar"){ dialog, id ->
+                                    val fragment = HomeFragment.newInstance()
+                                    openFragment(fragment)
+                                }
+                            val alert = builder.create()
+                            alert.show()
+                        }
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        }
+        myRefUsuario.addValueEventListener(usuarioListener)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,6 +117,8 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        auth = Firebase.auth
+        currentUser = auth.currentUser!!
 
         var vargs = arguments
         if (vargs != null){

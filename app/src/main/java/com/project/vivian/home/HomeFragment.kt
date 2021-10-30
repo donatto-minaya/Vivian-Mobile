@@ -48,41 +48,17 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener  {
 
         auth = Firebase.auth
 
-        updateUI()
+        //updateUI()
     }
 
     override fun onStart() {
         super.onStart()
         currentUser = auth.currentUser!!
+
+
+
     }
 
-    fun updateUI(){
-        val usuarioListener = object : ValueEventListener {
-
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                val myObject : Usuario? = dataSnapshot.child(currentUser.uid).getValue(Usuario::class.java)
-                if (myObject != null) {
-                    if (myObject.nombres == ""){
-                        val builder = AlertDialog.Builder(context)
-                        builder.setMessage(R.string.dialog_actualice_datos)
-                            .setCancelable(false)
-                            .setPositiveButton("OK") { dialog, id ->
-                                val fragment = CuentaFragment.newInstance()
-                                openFragment(fragment)
-                            }
-                        val alert = builder.create()
-                        alert.show()
-                    }
-                }
-
-            }
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        }
-        myRef.addValueEventListener(usuarioListener)
-    }
 
     fun openFragment(fragment: Fragment) {
         val transaction = this.requireActivity().supportFragmentManager.beginTransaction()
