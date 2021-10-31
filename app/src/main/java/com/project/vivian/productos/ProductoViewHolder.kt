@@ -16,20 +16,23 @@ class ProductoViewHolder (inflater: LayoutInflater, parent: ViewGroup):
     private var productoImageView : ImageView? = null
     private var textNombreProducto: TextView? = null
     private var textPrecioNumber: TextView? = null
+    private var textIdReserva : TextView? = null
 
     init {
         productoImageView = itemView.findViewById(R.id.imgProducto)
         textNombreProducto = itemView.findViewById(R.id.textNombreProducto)
         textPrecioNumber = itemView.findViewById(R.id.textPrecioNumero)
+        textIdReserva = itemView.findViewById(R.id.textIdReservacion)
     }
 
     fun bind(producto: Producto) {
         textNombreProducto?.text = producto.nombre
         textPrecioNumber?.text = producto.precio
+        textIdReserva = itemView.findViewById(R.id.textIdReservacion)
 
         val options = RequestOptions()
             .placeholder(R.drawable.anonymous_image)
-            .error(R.drawable.ic_launcher_background)
+            .error(R.drawable.anonymous_image)
 
         productoImageView?.let {
             Glide.with(it)

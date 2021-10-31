@@ -128,8 +128,10 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 vargs?.getString("fechaSend").toString(),
                 vargs?.getSerializable("mesaSend") as Mesa,
                 vargs?.getString("turnoSend").toString(),
+                vargs?.getString("usuarioSend").toString(),
                 vargs?.getString("idSend").toString()
             )
+            Log.v("USUARIOACT", reservaActualizar.toString())
             textTitle.setText(R.string.title_reservar_modificar)
             i_nombre.setText(reservaActualizar.nombreCliente)
             i_dni.setText(reservaActualizar.dni)
@@ -150,11 +152,11 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     if (dni.length == 8) {
                         if (mesa != 0){
                             val reservaObj =
-                                Reserva(nombre, dni, fecha, reservaActualizar.mesa, turno, reservaActualizar.key)
+                                Reserva(nombre, dni, fecha, reservaActualizar.mesa, turno,currentUser.email.toString(), reservaActualizar.key)
                             agregarOActualizarReservacion(reservaObj, true, true)
                         } else {
                             val reservaObj =
-                                Reserva(nombre, dni, fecha, reservaActualizar.mesa, turno, reservaActualizar.key)
+                                Reserva(nombre, dni, fecha, reservaActualizar.mesa, turno,currentUser.email.toString(), reservaActualizar.key)
                             agregarOActualizarReservacion(reservaObj, true, false)
                         }
 
@@ -184,7 +186,7 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
                 if (nombre.isNotEmpty() && fecha.isNotEmpty() && mesa != 0 &&turno.isNotEmpty() && dni.isNotEmpty()){
                     if (dni.length == 8){
-                        val reservaObj = Reserva(nombre,dni,fecha, mesa = Mesa(),turno)
+                        val reservaObj = Reserva(nombre,dni,fecha, mesa = Mesa(),turno,currentUser.email.toString())
                         agregarOActualizarReservacion(reservaObj, false, false)
                     } else {
                         alertDialog("Verifique DNI")

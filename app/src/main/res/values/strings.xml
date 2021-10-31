@@ -57,6 +57,8 @@
 
     <!-- Fragment Mis Reservaciones -->
     <string name="title_mis_reservaciones">Mis Reservaciones</string>
+    <string name="lblMesa">N° Personas:</string>
+    <string name="lblTurno">Turno:</string>
 
     <!-- Fragment Cuenta -->
     <string name="logo_background">Logo background</string>

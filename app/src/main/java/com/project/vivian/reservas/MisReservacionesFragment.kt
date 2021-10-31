@@ -13,7 +13,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import com.project.vivian.R
 import com.project.vivian.model.Reserva
 import kotlinx.android.synthetic.main.fragment_mis_reservaciones.*
@@ -21,7 +25,8 @@ import com.project.vivian.model.Mesa
 
 
 class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener, MisReservacionesAdapter.ItemClickListener {
-
+    private lateinit var auth: FirebaseAuth
+    private lateinit var currentUser : FirebaseUser
     private val database = FirebaseDatabase.getInstance()
     private val myRefReserva : DatabaseReference = database.getReference("reserva")
     private val myRefMesa : DatabaseReference = database.getReference("mesa")
@@ -63,6 +68,8 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        auth = Firebase.auth
+        currentUser = auth.currentUser!!
         listReservas.clear()
         setupRecyclerView(recyclerReservas)
 
@@ -78,6 +85,7 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener,
 
     private fun setupRecyclerView(recyclerView: RecyclerView){
 
+        val reservasPorEmailQuery: Query = myRefReserva.orderByChild("usuario").equalTo(currentUser.email)
         val listarReservaListener = object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -91,6 +99,7 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener,
                                 child.child("fecha").value.toString(),
                                 it,
                                 child.child("turno").value.toString(),
+                                child.child("usuario").value.toString(),
                                 child.key
                             )
                         }
@@ -103,7 +112,7 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener,
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
             }
         }
-        myRefReserva.addValueEventListener(listarReservaListener)
+        reservasPorEmailQuery.addValueEventListener(listarReservaListener)
     }
 
     override fun onItemClickNoteUpdate(reservaSelected: Reserva) {
@@ -114,7 +123,8 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener,
         args.putString("fechaSend",reservaSelected.fecha)
         args.putSerializable("mesaSend",reservaSelected.mesa)
         args.putString("turnoSend",reservaSelected.turno)
-        args.putString("idSend",reservaSelected.key)
+        args.putString("usuarioSend",reservaSelected.usuario)
+        args.putString("idSend",reservaSelected.key.toString())
         fragment.arguments = args
         openFragment(fragment)
     }
