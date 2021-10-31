@@ -2,6 +2,7 @@ package com.project.vivian.reservas
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.vivian.R
@@ -14,6 +15,7 @@ class MisReservacionesViewHolder(inflater: LayoutInflater, parent: ViewGroup) : 
     private var textFecha: TextView? = null
     private var textTurno: TextView? = null
     private var textMesa: TextView? = null
+    private var qrImageView : ImageView? = null
 
     init {
         textDni = itemView.findViewById(R.id.txtDni)
@@ -21,6 +23,7 @@ class MisReservacionesViewHolder(inflater: LayoutInflater, parent: ViewGroup) : 
         textFecha = itemView.findViewById(R.id.textDate)
         textTurno = itemView.findViewById(R.id.txtTurno)
         textMesa = itemView.findViewById(R.id.txtMesa)
+        qrImageView = itemView.findViewById(R.id.imgQrCode)
     }
 
     fun bind(reserva: Reserva){
@@ -29,5 +32,6 @@ class MisReservacionesViewHolder(inflater: LayoutInflater, parent: ViewGroup) : 
         textFecha?.text = reserva.fecha
         textTurno?.text = reserva.turno
         textMesa?.text = reserva.mesa.capacidadPersonas.toString()
+
     }
 }

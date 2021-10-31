@@ -94,12 +94,12 @@ class CambiarClaveFragment : Fragment() {
                                 if (taskUpdatePassword.isSuccessful) {
                                     val fragment = CuentaFragment.newInstance()
                                     openFragment(fragment)
-                                    Toast.makeText(this.requireContext(), "Se actualizó tu clave correctamente.", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this.requireContext(), "Se actualizó tu clave correctamente.", Toast.LENGTH_LONG).show()
                                 }
                             }
 
                     } else {
-                        Toast.makeText(this.requireContext(), "La contraseña actual es incorrecta.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this.requireContext(), "La contraseña actual es incorrecta.", Toast.LENGTH_LONG).show()
                     }
                 }
         }

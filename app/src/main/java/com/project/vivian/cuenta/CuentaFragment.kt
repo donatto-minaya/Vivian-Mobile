@@ -257,7 +257,7 @@ class CuentaFragment: Fragment(), AdapterView.OnItemSelectedListener {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             progressDialog2.dismiss()
-                            Toast.makeText(this.requireActivity(), "Se realizaron los cambios correctamente.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this.requireActivity(), "Foto subida correctamente.", Toast.LENGTH_SHORT).show()
                             updateUI()
                         }
                     }

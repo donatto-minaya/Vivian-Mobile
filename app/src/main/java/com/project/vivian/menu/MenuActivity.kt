@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.project.vivian.MainActivity
+import com.project.vivian.QRCodeActivity
 import com.project.vivian.R
-import com.project.vivian.SubirImgActivity
 import com.project.vivian.cuenta.CuentaFragment
 import com.project.vivian.home.HomeFragment
 import com.project.vivian.productos.ProductoFragment
@@ -54,7 +54,7 @@ class MenuActivity : AppCompatActivity() {
                     drawerLayout.closeDrawers()
                 }
                 R.id.nav_settings -> {
-                    startActivity(Intent(this,SubirImgActivity::class.java))
+                    startActivity(Intent(this,QRCodeActivity::class.java))
 
                 }
                 R.id.nav_logout -> {

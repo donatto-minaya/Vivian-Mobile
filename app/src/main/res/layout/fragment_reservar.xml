@@ -74,14 +74,24 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_below="@+id/spMesa"
-            android:layout_marginTop="20dp"
-            />
+            android:layout_marginTop="20dp" />
+
+        <ImageView
+            android:id="@+id/imgQrCode"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_below="@+id/spTurno"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/qr_code"
+            android:scaleType="centerCrop"
+            android:src="@drawable/anonymous_image"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/btnSolicitar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_below="@+id/spTurno"
+            android:layout_below="@+id/imgQrCode"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/default_pink_button"
             android:text="@string/btn_reservar_reservar"

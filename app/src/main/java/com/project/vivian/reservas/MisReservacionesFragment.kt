@@ -100,6 +100,7 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener,
                                 it,
                                 child.child("turno").value.toString(),
                                 child.child("usuario").value.toString(),
+                                child.child("qrcodeUrl").value.toString(),
                                 child.key
                             )
                         }
@@ -124,6 +125,7 @@ class MisReservacionesFragment : Fragment(), AdapterView.OnItemSelectedListener,
         args.putSerializable("mesaSend",reservaSelected.mesa)
         args.putString("turnoSend",reservaSelected.turno)
         args.putString("usuarioSend",reservaSelected.usuario)
+        args.putString("qrCodeUrlSend",reservaSelected.qrcodeUrl)
         args.putString("idSend",reservaSelected.key.toString())
         fragment.arguments = args
         openFragment(fragment)

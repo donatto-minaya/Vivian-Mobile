@@ -1,6 +1,5 @@
 package com.project.vivian.home
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +12,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.project.vivian.R
-import com.project.vivian.cuenta.CuentaFragment
-import com.project.vivian.model.Usuario
 
 class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener  {
 

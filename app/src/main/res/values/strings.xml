@@ -54,6 +54,7 @@
     <string name="title_reservar_modificar">Puedes modificar tu Reserva en cualquier momento. (Sujeto a disponibilidad)</string>
     <string name="btn_reservar_modificar">Modificar</string>
     <string name="text_delete_confirm">¿Deseas Eliminar la Reservación?</string>
+    <string name="qr_code">qr_code</string>
 
     <!-- Fragment Mis Reservaciones -->
     <string name="title_mis_reservaciones">Mis Reservaciones</string>

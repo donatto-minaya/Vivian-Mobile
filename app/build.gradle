@@ -37,6 +37,8 @@ android {
 }
 
 dependencies {
+    // QR
+    implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.3'
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:28.4.2')
     implementation 'com.google.firebase:firebase-database:19.2.1'

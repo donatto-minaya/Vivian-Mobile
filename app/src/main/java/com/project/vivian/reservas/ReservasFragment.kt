@@ -2,6 +2,7 @@ package com.project.vivian.reservas
 
 import android.app.DatePickerDialog
 import android.app.ProgressDialog
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
@@ -18,17 +19,30 @@ import com.project.vivian.ui.DatePickerFragment
 import kotlinx.android.synthetic.main.fragment_reservar.*
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidmads.library.qrgenearator.QRGContents
+import androidmads.library.qrgenearator.QRGEncoder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
+import com.google.zxing.WriterException
 import com.project.vivian.cuenta.CuentaFragment
-
 import com.project.vivian.home.HomeFragment
 import com.project.vivian.model.Reserva
 import com.project.vivian.model.Usuario
+import java.io.ByteArrayOutputStream
 import kotlin.collections.ArrayList
+import android.net.Uri
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+
+
+
+
 
 
 class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -49,6 +63,9 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
     var mesaAgregar : Mesa = Mesa()
     var listMesasDisponibles = ArrayList<Mesa>();
     var listTurnos = arrayOf("Mañana","Tarde","Noche")
+    var bitmap: Bitmap? = null
+    var qrgEncoder: QRGEncoder? = null
+    var downloadUrl: Uri? = null
 
     companion object{
         fun newInstance() : ReservasFragment = ReservasFragment()
@@ -122,6 +139,8 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         var vargs = arguments
         if (vargs != null){
+            imgQrCode.visibility = View.VISIBLE
+
             reservaActualizar = Reserva(
                 vargs?.getString("nombresSend").toString(),
                 vargs?.getString("apellidosSend").toString(),
@@ -129,9 +148,18 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 vargs?.getSerializable("mesaSend") as Mesa,
                 vargs?.getString("turnoSend").toString(),
                 vargs?.getString("usuarioSend").toString(),
+                vargs?.getString("qrCodeUrlSend").toString(),
                 vargs?.getString("idSend").toString()
             )
-            Log.v("USUARIOACT", reservaActualizar.toString())
+            val options = RequestOptions()
+                .placeholder(R.drawable.anonymous_image)
+                .error(R.drawable.ic_launcher_background)
+            imgQrCode?.let {
+                Glide.with(it)
+                    .setDefaultRequestOptions(options)
+                    .load(reservaActualizar.qrcodeUrl)
+                    .into(it)
+            }
             textTitle.setText(R.string.title_reservar_modificar)
             i_nombre.setText(reservaActualizar.nombreCliente)
             i_dni.setText(reservaActualizar.dni)
@@ -152,11 +180,11 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     if (dni.length == 8) {
                         if (mesa != 0){
                             val reservaObj =
-                                Reserva(nombre, dni, fecha, reservaActualizar.mesa, turno,currentUser.email.toString(), reservaActualizar.key)
+                                Reserva(nombre, dni, fecha, reservaActualizar.mesa, turno,currentUser.email.toString(),reservaActualizar.qrcodeUrl, reservaActualizar.key)
                             agregarOActualizarReservacion(reservaObj, true, true)
                         } else {
                             val reservaObj =
-                                Reserva(nombre, dni, fecha, reservaActualizar.mesa, turno,currentUser.email.toString(), reservaActualizar.key)
+                                Reserva(nombre, dni, fecha, reservaActualizar.mesa, turno,currentUser.email.toString(),reservaActualizar.qrcodeUrl, reservaActualizar.key)
                             agregarOActualizarReservacion(reservaObj, true, false)
                         }
 
@@ -173,6 +201,8 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 else -> spTurno.post(Runnable { spTurno.setSelection(2) })
             }
         } else {
+            imgQrCode.visibility = View.GONE
+
             btnCancelar.setOnClickListener {
                 val fragment = HomeFragment()
                 openFragment(fragment)
@@ -186,7 +216,7 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
                 if (nombre.isNotEmpty() && fecha.isNotEmpty() && mesa != 0 &&turno.isNotEmpty() && dni.isNotEmpty()){
                     if (dni.length == 8){
-                        val reservaObj = Reserva(nombre,dni,fecha, mesa = Mesa(),turno,currentUser.email.toString())
+                        val reservaObj = Reserva(nombre,dni,fecha, mesa = Mesa(),turno,currentUser.email.toString(),"")
                         agregarOActualizarReservacion(reservaObj, false, false)
                     } else {
                         alertDialog("Verifique DNI")
@@ -237,12 +267,49 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         } else {
             reserva.mesa = mesaAgregar
-            myRefReserva.child(myRefReserva.push().key.toString()).setValue(reserva)
+            val listarReservaListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    setUrlQrCodeReserva(dataSnapshot.key.toString(), reserva)
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            }
+            myRefReserva.child(myRefReserva.push().key.toString()).addListenerForSingleValueEvent(listarReservaListener)
             myRefMesa.child(idMesaFromSpinner).child("disponible").setValue(false)
 
         }
         val fragment = MisReservacionesFragment.newInstance()
         openFragment(fragment)
+    }
+
+    fun setUrlQrCodeReserva(key: String, reserva : Reserva): Uri? {
+        qrgEncoder =
+            QRGEncoder(key, null, QRGContents.Type.TEXT,500)
+        try {
+            bitmap = qrgEncoder!!.encodeAsBitmap()
+            var baos : ByteArrayOutputStream = ByteArrayOutputStream()
+            bitmap!!.compress(Bitmap.CompressFormat.JPEG,90,baos)
+            var data : ByteArray = baos.toByteArray()
+            val folder: StorageReference = FirebaseStorage.getInstance().reference.child("qrcode")
+            val fileName: StorageReference = folder.child("reserva$key")
+
+            val uploadTask: UploadTask = fileName.putBytes(data)
+            uploadTask.addOnFailureListener {
+            }
+            .addOnSuccessListener { taskSnapshot ->
+                downloadUrl = taskSnapshot.uploadSessionUri
+                myRefReserva.child(key).setValue(reserva)
+
+                fileName.getDownloadUrl().addOnSuccessListener { uri ->
+                    myRefReserva.child(key).child("qrcodeUrl").setValue(uri.toString())
+                }
+            }
+            return downloadUrl
+        } catch (e: WriterException) {
+            Log.v("Tag", e.toString())
+            return null
+        }
     }
 
     fun showDatePickerDialog() {

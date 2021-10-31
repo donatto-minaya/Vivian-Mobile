@@ -1,7 +1,6 @@
 package com.project.vivian.productos
 
 import android.app.ProgressDialog
-import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -9,32 +8,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.project.vivian.R
 import com.project.vivian.cuenta.CuentaFragment
 import com.project.vivian.home.HomeFragment
-import com.project.vivian.model.Mesa
 import com.project.vivian.model.Producto
 import com.project.vivian.model.Reserva
 import com.project.vivian.model.Usuario
 import com.project.vivian.reservas.MisReservacionesAdapter
-import com.project.vivian.reservas.MisReservacionesFragment
 import kotlinx.android.synthetic.main.fragment_delivery.*
-import kotlinx.android.synthetic.main.fragment_mis_reservaciones.*
-import kotlinx.android.synthetic.main.item_producto.*
 
 class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, MisReservacionesAdapter.ItemClickListener {
 
