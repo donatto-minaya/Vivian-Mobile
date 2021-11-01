@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red_cancelar">#C53A3A</color>
+    <color name="green_registrar">#FF1E780A</color>
+    <color name="default_pink">#F2A999</color>
+    <color name="default_pink_2">#CC8F82</color>
+    <color name="default_pink_3">#D39E92</color>
+    <color name="default_pink_4">#B16D5E</color>
+    <color name="default_pink_button">#FA7153</color>
+    <color name="light_grey">#D3CCCC</color>
+    <color name="colorBackground">#EAEDEF</color>
 </resources>

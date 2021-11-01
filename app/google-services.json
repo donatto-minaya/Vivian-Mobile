@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "253685533029",
+    "project_id": "vivian-mobile",
+    "storage_bucket": "vivian-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253685533029:android:d0f31bf9ec85e8e223398c",
+        "android_client_info": {
+          "package_name": "com.project.vivian"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "253685533029-h5898vf2ej87htocbr2hasff3cbclt8m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUZ6KHTrakRTXd6CJNuE4xMG4FfM18350"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "253685533029-h5898vf2ej87htocbr2hasff3cbclt8m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

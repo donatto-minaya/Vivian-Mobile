@@ -1,8 +1,85 @@
 <resources>
-    <string name="app_name">vivian</string>
-    <string name="iniciar_sesion">Inicia Sesión p loco y come con nosotros</string>
+    <string name="app_name">Vivian</string>
+    <string name="app_correo">vivian.support@vivian.pe</string>
+    <string name="logo_vivian">Logo vivian</string>
+    <string name="logo_go_back">Go back</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="dialog_title">Confirmación</string>
+
+    <!-- Main Activity -->
+    <string name="title_inicia_sesion">Inicia Sesión</string>
+    <string name="btn_login_ingresar">Ingresar</string>
+    <string name="btn_login_registrar">Registrar</string>
     <string name="correo">Correo</string>
     <string name="clave">Clave</string>
-    <string name="boton_login_ingresar">Ingresar</string>
-    <string name="logo_vivian">Logo vivian</string>
+
+    <!-- Registro Activity -->
+    <string name="title_registrate">Registrate</string>
+    <string name="btn_registro_registrar">Registrate</string>
+    <string name="repeat_clave">Repite tu clave</string>
+    <string name="dialong_creado_correctamente">Usuario creado correctamente.</string>
+
+    <string name="all">TODO</string>
+    <string-array name="your_string_array">
+        <item>Hint...</item>
+        <item>Item1</item>
+        <item>Item2</item>
+        <item>Item3</item>
+    </string-array>
+
+
+    <!-- Bottom Menu -->
+    <string name="nav_home">Home</string>
+    <string name="nav_reservar">Reservar</string>
+    <string name="nav_delivery">Delivery</string>
+
+    <!-- Left Side Bar -->
+    <string name="right_sidebar_cuenta">Cuenta</string>
+    <string name="right_sidebar_reservaciones">Mis Reservaciones</string>
+    <string name="right_sidebar_configuracion">Configuración</string>
+    <string name="right_sidebar_logout">Cerrar Sesión</string>
+    <string name="right_sidebar_open">Open</string>
+    <string name="right_sidebar_close">Close</string>
+    <string name="dialog_signout_confirm">¿Seguro de Cerrar Sesión?</string>
+
+    <!-- Fragment Home -->
+    <string name="dialog_actualice_datos">Por favor, actualiza tus datos para poder comenzar a utilizar nuestros servicios :D</string>
+
+    <!-- Fragment Reservar -->
+    <string name="title_reservar">Deseas reservar para una fecha especial? Ahora es el momento.</string>
+    <string name="i_nombre_reservar">Nombre</string>
+    <string name="i_dni_reservar">DNI</string>
+    <string name="i_fecha_reservar">Fecha de reservación</string>
+    <string name="btn_reservar_reservar">Reservar</string>
+    <string name="title_reservar_modificar">Puedes modificar tu Reserva en cualquier momento. (Sujeto a disponibilidad)</string>
+    <string name="btn_reservar_modificar">Modificar</string>
+    <string name="text_delete_confirm">¿Deseas Eliminar la Reservación?</string>
+    <string name="qr_code">qr_code</string>
+
+    <!-- Fragment Mis Reservaciones -->
+    <string name="title_mis_reservaciones">Mis Reservaciones</string>
+    <string name="lblMesa">N° Personas:</string>
+    <string name="lblTurno">Turno:</string>
+
+    <!-- Fragment Cuenta -->
+    <string name="logo_background">Logo background</string>
+    <string name="btn_update_profile">Guardar</string>
+    <string name="change_password">Cambiar clave</string>
+    <string name="delete_account">Eliminar cuenta</string>
+    <string name="dialog_updateprofile_confirm">¿Seguro de actualizar tu perfil?</string>
+    <!-- Fragment Cambiar Clave -->
+    <string name="title_cambiar_clave">Cambio de clave</string>
+    <string name="parrafo_cambiar_clave">Por motivos de seguridad para cambiar tu clave, primero debes ingresar tu clave actual.</string>
+    <string name="cambiarclave_claveactual">Clave actual</string>
+    <string name="cambiarclave_nuevaclave">Nueva clave</string>
+    <string name="cambiarclave_repiteclave">Repite tu nueva clave</string>
+
+
+    <!-- Fragment Delivery -->
+    <string name="title_producto">Los mejores platos en Vivian</string>
+    <string name="precio_producto">Precio: S/</string>
+    <string name="cantidad_producto">Cantidad:</string>
+
+
+
 </resources>

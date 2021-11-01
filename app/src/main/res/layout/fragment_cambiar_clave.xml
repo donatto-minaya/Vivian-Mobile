@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:padding="5dp">
+
+
+    <ImageView
+        android:id="@+id/cambiarclave_goback"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:contentDescription="@string/logo_vivian"
+        android:id="@+id/wave_login"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cambiarclave_goback"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:src="@drawable/corazon" />
+
+    <TextView
+        android:id="@+id/titulo_cambiar_clave"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wave_login"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/black"
+        android:text="@string/title_cambiar_clave"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/parrafo_cambiar_clave"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo_cambiar_clave"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:justificationMode="inter_word"
+        android:layout_marginTop="15dp"
+        android:text="@string/parrafo_cambiar_clave"
+        android:textSize="15sp" />
+
+    <EditText
+        android:inputType="textPassword"
+        android:autofillHints="password"
+        android:id="@+id/textClaveActual"
+        app:layout_constraintTop_toBottomOf="@id/parrafo_cambiar_clave"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/password"
+        android:drawablePadding="10dp"
+        android:paddingStart="15dp"
+        android:hint="@string/cambiarclave_claveactual"
+        android:textCursorDrawable="@drawable/custom_cursor"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"/>
+
+    <EditText
+        android:inputType="textPassword"
+        android:autofillHints="password"
+        android:id="@+id/textNuevaClave"
+        app:layout_constraintTop_toBottomOf="@id/textClaveActual"
+        android:background="@drawable/custom_input"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:drawablePadding="10dp"
+        android:paddingStart="15dp"
+        android:hint="@string/cambiarclave_nuevaclave"
+        android:textCursorDrawable="@drawable/custom_cursor"
+        android:drawableStart="@drawable/password"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"/>
+
+    <EditText
+        android:inputType="textPassword"
+        android:autofillHints="password"
+        android:id="@+id/textNuevaClaveRepeat"
+        app:layout_constraintTop_toBottomOf="@id/textNuevaClave"
+        android:background="@drawable/custom_input"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:drawablePadding="10dp"
+        android:paddingStart="15dp"
+        android:hint="@string/cambiarclave_repiteclave"
+        android:textCursorDrawable="@drawable/custom_cursor"
+        android:drawableStart="@drawable/password"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"/>
+
+    <Button
+        android:id="@+id/button_cambiarclave_guardar"
+        app:layout_constraintTop_toBottomOf="@id/textNuevaClaveRepeat"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="@string/btn_update_profile"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:backgroundTint="#ff384c"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
