@@ -37,6 +37,8 @@ android {
 }
 
 dependencies {
+    // Swipe view decorator
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
     // QR
     implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.3'
     // Firebase

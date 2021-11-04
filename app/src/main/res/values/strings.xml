@@ -76,10 +76,15 @@
 
 
     <!-- Fragment Delivery -->
-    <string name="title_producto">Los mejores platos en Vivian</string>
+    <string name="title_producto">Los mejores platos los encuentras en Vivian</string>
     <string name="precio_producto">Precio: S/</string>
+    <string name="precio_total_producto">Total: S/</string>
     <string name="cantidad_producto">Cantidad:</string>
 
-
+    <!-- Activity Carrito -->
+    <string name="title_carrito">Carrito</string>
+    <string name="title_precio_total">Total: S/</string>
+    <string name="btn_carrito_confirmar">¡Confirmar!</string>
+    <string name="text_lista_vacia">Tu Carrito está vacío. Puedes llenarlo en cualquier momento :D</string>
 
 </resources>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="@color/white"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textNombreProductoDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Nombre del producto"
+            android:textSize="28sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textDescripcionProductoDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripcion del producto"
+            android:lines="4"
+            android:minLines="4"
+            android:scrollbars="vertical"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/textNombreProductoDialog"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/textCantidadDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cantidad_producto"
+            app:layout_constraintTop_toBottomOf="@+id/textDescripcionProductoDialog"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/textCantidadNumeroDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="2"
+            app:layout_constraintTop_toBottomOf="@+id/textDescripcionProductoDialog"
+            app:layout_constraintStart_toEndOf="@id/textCantidadDialog"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/textPrecioDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/precio_total_producto"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/textCantidadNumeroDialog"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/textPrecioNumeroDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="100.00"
+            app:layout_constraintTop_toBottomOf="@+id/textCantidadNumeroDialog"
+            app:layout_constraintStart_toEndOf="@id/textPrecioDialog"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/button_agregar_itemcarrito"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:text="Añadir al carrito"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/default_pink_button"
+            app:layout_constraintTop_toBottomOf="@id/textPrecioDialog"/>
+
+        <Button
+            android:id="@+id/button_cancelar_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Cancelar"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/red_cancelar"
+            app:layout_constraintTop_toBottomOf="@id/button_agregar_itemcarrito"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

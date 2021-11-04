@@ -5,8 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.vivian.model.Producto
 import com.project.vivian.reservas.MisReservacionesAdapter
+import kotlinx.android.synthetic.main.item_producto.view.*
 
-class ProductoAdapter (val list: List<Producto>, val itemClickListener: MisReservacionesAdapter.ItemClickListener): RecyclerView.Adapter<ProductoViewHolder>() {
+class ProductoAdapter (val list: List<Producto>, val itemClickListener: ItemClickListener): RecyclerView.Adapter<ProductoViewHolder>() {
+
+    interface ItemClickListener {
+        fun onItemClickMasUno(holder: ProductoViewHolder)
+        fun onItemClickMenosUno(holder: ProductoViewHolder)
+        fun onItemClickAddProducto(productoSelected : Producto, holder: ProductoViewHolder)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -16,6 +23,18 @@ class ProductoAdapter (val list: List<Producto>, val itemClickListener: MisReser
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
         val productos: Producto = list[position]
         holder.bind(productos)
+
+        holder.itemView.imgMasUno.setOnClickListener {
+            itemClickListener.onItemClickMasUno(holder)
+        }
+
+        holder.itemView.imgMenosUno.setOnClickListener {
+            itemClickListener.onItemClickMenosUno(holder)
+        }
+
+        holder.itemView.addProducto.setOnClickListener {
+            itemClickListener.onItemClickAddProducto(productos,holder)
+        }
     }
 
     override fun getItemCount(): Int {

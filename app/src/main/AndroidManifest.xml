@@ -13,7 +13,8 @@
         android:theme="@style/Theme.Vivian">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,9 +23,12 @@
         </activity>
 
         <activity android:name=".menu.MenuActivity"/>
-        <activity android:name=".RegistroActivity"/>
+        <activity android:name=".RegistroActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
         <activity android:name=".SubirImgActivity"/>
         <activity android:name=".QRCodeActivity"/>
+        <activity android:name=".carrito.CarritoActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
 
     </application>
 

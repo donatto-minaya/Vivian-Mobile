@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    app:cardBackgroundColor="@color/light_grey"
+    android:background="@color/colorBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/imgProductoCarrito"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/anonymous_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@string/all"/>
+
+
+        <TextView
+            android:id="@+id/textNombreProductoCarrito"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Nombre del producto todo el producto"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/imgProductoCarrito"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/textPrecioTotal"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Subtotal: "
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/imgProductoCarrito"
+            app:layout_constraintTop_toBottomOf="@+id/textNombreProductoCarrito"/>
+
+
+        <TextView
+            android:id="@+id/textPrecioCarrito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:text="S/ "
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/textPrecioTotal"
+            app:layout_constraintStart_toEndOf="@id/imgProductoCarrito"/>
+
+        <TextView
+            android:id="@+id/textPrecioNumeroCarrito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="30.00"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/textPrecioTotal"
+            app:layout_constraintStart_toEndOf="@id/textPrecioCarrito"/>
+
+
+        <EditText
+            android:id="@+id/textCantidadNumeroCarrito"
+            android:padding="10dp"
+            android:paddingStart="18dp"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:background="@drawable/custom_input"
+            android:backgroundTint="@color/light_grey_2"
+            android:text="3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textNombreProductoCarrito"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

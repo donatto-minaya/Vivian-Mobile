@@ -37,12 +37,10 @@ import com.project.vivian.model.Usuario
 import java.io.ByteArrayOutputStream
 import kotlin.collections.ArrayList
 import android.net.Uri
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-
-
-
-
+import java.util.regex.Pattern
 
 
 class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -56,6 +54,7 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var currentUser : FirebaseUser
     private lateinit var reservaActualizar : Reserva
     private lateinit var progressDialog: ProgressDialog
+    private lateinit var progressDialogReservar : ProgressDialog
     private lateinit var idMesaFromSpinner : String
 
     var listCantidadPersonasSpinner : ArrayList<String> = ArrayList()
@@ -137,6 +136,13 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
         auth = Firebase.auth
         currentUser = auth.currentUser!!
 
+        progressDialogReservar = ProgressDialog(this.requireActivity())
+        progressDialogReservar.progress = 10
+        progressDialogReservar.max = 100
+        progressDialogReservar.setMessage("Reservando...")
+
+        val nombresApellidosRegex = Pattern.compile("^[A-Za-z\\s]+\$")
+
         var vargs = arguments
         if (vargs != null){
             imgQrCode.visibility = View.VISIBLE
@@ -178,16 +184,20 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
                 if (nombre.isNotEmpty() && fecha.isNotEmpty() && turno.isNotEmpty() && dni.isNotEmpty()){
                     if (dni.length == 8) {
-                        if (mesa != 0){
-                            val reservaObj =
-                                Reserva(nombre, dni, fecha, reservaActualizar.mesa, turno,currentUser.email.toString(),reservaActualizar.qrcodeUrl, reservaActualizar.key)
-                            agregarOActualizarReservacion(reservaObj, true, true)
+                        if (nombresApellidosRegex.matcher(nombre).matches()){
+                            progressDialogReservar.show()
+                            if (mesa != 0){
+                                val reservaObj =
+                                    Reserva(nombre, dni, fecha, reservaActualizar.mesa, turno,currentUser.email.toString(),reservaActualizar.qrcodeUrl, reservaActualizar.key)
+                                agregarOActualizarReservacion(reservaObj, true, true)
+                            } else {
+                                val reservaObj =
+                                    Reserva(nombre, dni, fecha, reservaActualizar.mesa, turno,currentUser.email.toString(),reservaActualizar.qrcodeUrl, reservaActualizar.key)
+                                agregarOActualizarReservacion(reservaObj, true, false)
+                            }
                         } else {
-                            val reservaObj =
-                                Reserva(nombre, dni, fecha, reservaActualizar.mesa, turno,currentUser.email.toString(),reservaActualizar.qrcodeUrl, reservaActualizar.key)
-                            agregarOActualizarReservacion(reservaObj, true, false)
+                            Toast.makeText(this.requireContext(),"Ingresa un Nombre válido", Toast.LENGTH_LONG).show()
                         }
-
                     } else {
                         alertDialog("Verifique DNI")
                     }
@@ -216,8 +226,13 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
                 if (nombre.isNotEmpty() && fecha.isNotEmpty() && mesa != 0 &&turno.isNotEmpty() && dni.isNotEmpty()){
                     if (dni.length == 8){
-                        val reservaObj = Reserva(nombre,dni,fecha, mesa = Mesa(),turno,currentUser.email.toString(),"")
-                        agregarOActualizarReservacion(reservaObj, false, false)
+                        if (nombresApellidosRegex.matcher(nombre).matches()){
+                            progressDialogReservar.show()
+                            val reservaObj = Reserva(nombre,dni,fecha, mesa = Mesa(),turno,currentUser.email.toString(),"")
+                            agregarOActualizarReservacion(reservaObj, false, false)
+                        } else {
+                            Toast.makeText(this.requireContext(),"Ingresa un Nombre válido", Toast.LENGTH_LONG).show()
+                        }
                     } else {
                         alertDialog("Verifique DNI")
                     }
@@ -257,17 +272,20 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 myRefReserva.child(reserva.key.toString()).child("nombreCliente").setValue(reserva.nombreCliente)
                 myRefReserva.child(reserva.key.toString()).child("turno").setValue(reserva.turno)
                 myRefReserva.child(reserva.key.toString()).child("mesa").setValue(mesaAgregar)
+                progressDialogReservar.dismiss()
 
             } else {
                 myRefReserva.child(reserva.key.toString()).child("dni").setValue(reserva.dni)
                 myRefReserva.child(reserva.key.toString()).child("fecha").setValue(reserva.fecha)
                 myRefReserva.child(reserva.key.toString()).child("nombreCliente").setValue(reserva.nombreCliente)
                 myRefReserva.child(reserva.key.toString()).child("turno").setValue(reserva.turno)
+                progressDialogReservar.dismiss()
             }
-
+            val fragment = MisReservacionesFragment.newInstance()
+            openFragment(fragment)
         } else {
             reserva.mesa = mesaAgregar
-            val listarReservaListener = object : ValueEventListener {
+            val agregarNuevaReservaListener = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     setUrlQrCodeReserva(dataSnapshot.key.toString(), reserva)
                 }
@@ -275,12 +293,11 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     TODO("Not yet implemented")
                 }
             }
-            myRefReserva.child(myRefReserva.push().key.toString()).addListenerForSingleValueEvent(listarReservaListener)
+            myRefReserva.child(myRefReserva.push().key.toString()).addListenerForSingleValueEvent(agregarNuevaReservaListener)
             myRefMesa.child(idMesaFromSpinner).child("disponible").setValue(false)
 
         }
-        val fragment = MisReservacionesFragment.newInstance()
-        openFragment(fragment)
+
     }
 
     fun setUrlQrCodeReserva(key: String, reserva : Reserva): Uri? {
@@ -304,6 +321,9 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 fileName.getDownloadUrl().addOnSuccessListener { uri ->
                     myRefReserva.child(key).child("qrcodeUrl").setValue(uri.toString())
                 }
+                progressDialogReservar.dismiss()
+                val fragment = MisReservacionesFragment.newInstance()
+                openFragment(fragment)
             }
             return downloadUrl
         } catch (e: WriterException) {

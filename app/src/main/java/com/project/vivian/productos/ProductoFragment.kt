@@ -1,5 +1,6 @@
 package com.project.vivian.productos
 
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.os.AsyncTask
 import android.os.Bundle
@@ -23,14 +24,18 @@ import com.project.vivian.model.Producto
 import com.project.vivian.model.Reserva
 import com.project.vivian.model.Usuario
 import com.project.vivian.reservas.MisReservacionesAdapter
+import kotlinx.android.synthetic.main.dialog_producto.view.*
 import kotlinx.android.synthetic.main.fragment_delivery.*
+import kotlinx.android.synthetic.main.item_producto.*
+import kotlinx.android.synthetic.main.item_producto.view.*
 
-class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, MisReservacionesAdapter.ItemClickListener {
+class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, ProductoAdapter.ItemClickListener {
 
 
     private val database = FirebaseDatabase.getInstance()
     private val myRefProducto : DatabaseReference = database.getReference("producto")
     private val myRefUsuario : DatabaseReference = database.getReference("usuario")
+    private val myRefCarrito : DatabaseReference = database.getReference("carrito")
 
     var listProductos = ArrayList<Producto>();
 
@@ -128,9 +133,10 @@ class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, MisRes
                                 child.child("nombre").value.toString(),
                                 child.child("precio").value.toString(),
                                 child.child("stock").value.toString(),
+                                child.child("descripcion").value.toString(),
                                 child.key
                             )
-                        producto?.let { listProductos.add(it) }
+                    producto?.let { listProductos.add(it) }
                 }
                 loadData()
             }
@@ -156,19 +162,122 @@ class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, MisRes
         TODO("Not yet implemented")
     }
 
-    override fun onItemClickNoteUpdate(reservaSelected: Reserva) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onItemClickNoteDelete(reservaSelected: Reserva) {
-        TODO("Not yet implemented")
-    }
-
     fun openFragment(fragment: Fragment) {
         val transaction = this.requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_menu, fragment)
         transaction.commit()
     }
 
+    override fun onItemClickMasUno(holder: ProductoViewHolder) {
+        holder.sumarUno()
+        holder.itemView.textCantidadNumero.setText(holder.cantidad.toString())
+    }
+
+    override fun onItemClickMenosUno(holder: ProductoViewHolder) {
+        if (holder.cantidad > 1){
+            holder.restarUno()
+        }
+        holder.itemView.textCantidadNumero.setText(holder.cantidad.toString())
+    }
+
+    override fun onItemClickAddProducto(productoSelected: Producto, holder: ProductoViewHolder) {
+        createDialogProducto(productoSelected,holder)
+    }
+
+    fun createDialogProducto(producto: Producto, holder: ProductoViewHolder){
+        var precioTotal : Double = holder.itemView.textCantidadNumero.text.toString().toDouble() * producto.precio.toString().toDouble()
+
+        val mDialogView = LayoutInflater.from(context).inflate(R.layout.dialog_producto, null)
+
+        val mBuilder = AlertDialog.Builder(context)
+            .setView(mDialogView)
+            .setCancelable(false)
+
+        val mAlertDialog = mBuilder.show()
+
+        mDialogView.textNombreProductoDialog.text = producto.nombre
+        mDialogView.textDescripcionProductoDialog.text = producto.descripcion
+        mDialogView.textCantidadNumeroDialog.text = holder.itemView.textCantidadNumero.text
+        mDialogView.textPrecioNumeroDialog.text = precioTotal.toString()
+
+        mDialogView.button_cancelar_dialog.setOnClickListener {
+            mAlertDialog.dismiss()
+        }
+        mDialogView.button_agregar_itemcarrito.setOnClickListener {
+            agregarBuscarItemCarrito(mDialogView, producto)
+            mAlertDialog.dismiss()
+        }
+
+    }
+
+    fun agregarBuscarItemCarrito(mDialogView : View, producto : Producto){
+        var flg = 0
+        val itemsPorEmailQuery: Query = myRefCarrito.orderByChild("usuario").equalTo(currentUser.email)
+        val obtenerProductoCarritoListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var keySearch : String = ""
+                var keyActualizar : String = ""
+                snapshot.children.forEach { child ->
+                    keySearch = child.child("producto").child("key").value.toString()
+                    if (keySearch == producto.key){
+                        keyActualizar = child.key.toString()
+                        flg = 1
+                    }
+                }
+                if (flg == 1){
+                    agregarOActualizarItemCarrito(mDialogView,producto,true, keyActualizar)
+                } else {
+                    agregarOActualizarItemCarrito(mDialogView, producto, false, null)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("TAG", "loadPost:onCancelled", error.toException())
+            }
+
+        }
+        itemsPorEmailQuery.addListenerForSingleValueEvent(obtenerProductoCarritoListener)
+
+    }
+
+
+    fun agregarOActualizarItemCarrito(mDialogView : View, producto : Producto, actualizar : Boolean, keyActualizar : String?){
+        if (actualizar){
+            val actualizarItemCarritoListener = object : ValueEventListener {
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val cantidadActual = dataSnapshot.child("cantidad").value.toString().toInt()
+                    val cantidadNueva = cantidadActual + mDialogView.textCantidadNumeroDialog.text.toString().toInt()
+                    val precioActual = dataSnapshot.child("preciototal").value.toString().toDouble()
+                    val precioNuevo = precioActual + mDialogView.textPrecioNumeroDialog.text.toString().toDouble()
+                    myRefCarrito.child(keyActualizar!!).child("cantidad").setValue(cantidadNueva)
+                    myRefCarrito.child(keyActualizar).child("preciototal").setValue(precioNuevo)
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
+                }
+            }
+
+            myRefCarrito.child(keyActualizar!!).addListenerForSingleValueEvent(actualizarItemCarritoListener)
+
+        } else {
+
+            val agregarItemCarritoListener = object : ValueEventListener {
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    myRefCarrito.child(dataSnapshot.key.toString()).child("producto").setValue(producto)
+                    myRefCarrito.child(dataSnapshot.key.toString()).child("preciototal").setValue(mDialogView.textPrecioNumeroDialog.text.toString().toDouble())
+                    myRefCarrito.child(dataSnapshot.key.toString()).child("cantidad").setValue(mDialogView.textCantidadNumeroDialog.text.toString().toInt())
+                    myRefCarrito.child(dataSnapshot.key.toString()).child("usuario").setValue(currentUser.email)
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
+                }
+            }
+
+            myRefCarrito.child(myRefCarrito.push().key.toString()).addListenerForSingleValueEvent(agregarItemCarritoListener)
+        }
+
+    }
 
 }

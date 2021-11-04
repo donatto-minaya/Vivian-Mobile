@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.project.vivian.R
 import com.project.vivian.model.Producto
+import org.w3c.dom.Text
 
 class ProductoViewHolder (inflater: LayoutInflater, parent: ViewGroup):
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_producto, parent, false)){
@@ -16,11 +17,20 @@ class ProductoViewHolder (inflater: LayoutInflater, parent: ViewGroup):
     private var productoImageView : ImageView? = null
     private var textNombreProducto: TextView? = null
     private var textPrecioNumber: TextView? = null
+    var cantidad : Int = 1
 
     init {
         productoImageView = itemView.findViewById(R.id.imgProducto)
         textNombreProducto = itemView.findViewById(R.id.textNombreProducto)
         textPrecioNumber = itemView.findViewById(R.id.textPrecioNumero)
+    }
+
+    fun sumarUno() {
+        cantidad++
+    }
+
+    fun restarUno()  {
+        cantidad--
     }
 
     fun bind(producto: Producto) {

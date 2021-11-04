@@ -16,4 +16,5 @@
     <color name="default_pink_button">#FA7153</color>
     <color name="light_grey">#D3CCCC</color>
     <color name="colorBackground">#EAEDEF</color>
+    <color name="light_grey_2">#E8E5E5</color>
 </resources>
