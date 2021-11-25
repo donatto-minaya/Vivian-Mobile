@@ -14,12 +14,14 @@
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/drawable/ic_buttom.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_carrito_compras.xml" value="0.25" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_descripcion_producto.xml" value="0.23385416666666667" />
+        <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_launcher.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_menu.xml" value="0.33" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_menu_bottom.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_registro.xml" value="0.25" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/dialog_producto.xml" value="0.33" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/drpdn_qual.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/fragment_cambiar_clave.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/fragment_cambiar_contrasenia.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/fragment_cuenta.xml" value="0.25" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/fragment_delivery.xml" value="0.33" />
@@ -42,6 +44,8 @@
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/menu/right_sidebar_header.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/menu/rigth_side_bar.xml" value="0.33" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/menu/top_actionbar_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.23802083333333332" />
+        <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.25" />
       </map>
     </option>
   </component>

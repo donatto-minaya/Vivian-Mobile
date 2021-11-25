@@ -25,6 +25,8 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.project.vivian.MainActivity
 import com.project.vivian.R
+import com.project.vivian.VivianApp
+import com.project.vivian.menu.MenuActivity
 import com.project.vivian.model.Usuario
 import kotlinx.android.synthetic.main.fragment_cuenta.*
 import java.util.regex.Pattern
@@ -121,8 +123,8 @@ class CuentaFragment: Fragment(), AdapterView.OnItemSelectedListener {
             builder.setMessage(R.string.dialog_signout_confirm)
                 .setCancelable(false)
                 .setPositiveButton("Si") { dialog, id ->
-                    auth.signOut()
-                    startActivity(Intent(this.requireActivity(), MainActivity::class.java))
+                    VivianApp.prefs!!.clear()
+                    (activity as MenuActivity).cerrarSesion()
                 }
                 .setNegativeButton("Cancelar") { dialog, id ->
                     dialog.dismiss()

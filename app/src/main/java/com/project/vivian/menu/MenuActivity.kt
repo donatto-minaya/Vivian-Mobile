@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.project.vivian.MainActivity
 import com.project.vivian.QRCodeActivity
 import com.project.vivian.R
+import com.project.vivian.VivianApp
 import com.project.vivian.carrito.CarritoActivity
 import com.project.vivian.cuenta.CuentaFragment
 import com.project.vivian.home.HomeFragment
@@ -63,9 +64,8 @@ class MenuActivity : AppCompatActivity() {
                     builder.setMessage(R.string.dialog_signout_confirm)
                         .setCancelable(false)
                         .setPositiveButton("Si") { dialog, id ->
-                            auth.signOut()
-                            finish()
-                            startActivity(Intent(this, MainActivity::class.java))
+                            VivianApp.prefs!!.clear()
+                            cerrarSesion()
                         }
                         .setNegativeButton("Cancelar") { dialog, id ->
                             dialog.dismiss()
@@ -101,6 +101,11 @@ class MenuActivity : AppCompatActivity() {
         nav_view.selectedItemId = R.id.navigationHome
 
 
+    }
+
+    fun cerrarSesion(){
+        finish()
+        startActivity(Intent(this, MainActivity::class.java))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
