@@ -29,18 +29,6 @@ class MainActivity : AppCompatActivity() {
     //private val myRef : DatabaseReference = database.getReference("usuario")
     //private val myRef2 : DatabaseReference = database.getReference("mesa")
 
-    companion object{
-        class MyTask(private val activity: MainActivity ) : AsyncTask<Void, Void, Void>(){
-            override fun doInBackground(vararg p0: Void?): Void? {
-                return null
-            }
-
-            override fun onPreExecute() {
-                activity.progressDialog.show()
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -48,8 +36,6 @@ class MainActivity : AppCompatActivity() {
 
 
         progressDialog = ProgressDialog(this)
-        progressDialog.progress = 10
-        progressDialog.max = 100
         progressDialog.setMessage("Cargando...")
 
         /*val usu = Usuario("asdasd","Ramen","14.99","5")
@@ -82,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
                     VivianApp.prefs!!.setBoolean(Constantes.KEY_LOGIN, true)
                     finish()
                     startActivity(Intent(this,MenuActivity::class.java))

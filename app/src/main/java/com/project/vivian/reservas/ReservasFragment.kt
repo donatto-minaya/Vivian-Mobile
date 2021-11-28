@@ -266,7 +266,7 @@ class ReservasFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
                 myRefMesa.child(reserva.mesa.key.toString()).child("disponible").setValue(true)
                 myRefMesa.child(mesaAgregar.key.toString()).child("disponible").setValue(false)
-                myRefMesa.child(idMesaFromSpinner).child("disponible").setValue(false)
+                //myRefMesa.child(idMesaFromSpinner).child("disponible").setValue(false)
                 myRefReserva.child(reserva.key.toString()).child("dni").setValue(reserva.dni)
                 myRefReserva.child(reserva.key.toString()).child("fecha").setValue(reserva.fecha)
                 myRefReserva.child(reserva.key.toString()).child("nombreCliente").setValue(reserva.nombreCliente)

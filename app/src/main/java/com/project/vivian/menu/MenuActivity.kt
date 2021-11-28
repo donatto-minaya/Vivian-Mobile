@@ -15,6 +15,7 @@ import com.project.vivian.MainActivity
 import com.project.vivian.QRCodeActivity
 import com.project.vivian.R
 import com.project.vivian.VivianApp
+import com.project.vivian.acerca.MapsActivity
 import com.project.vivian.carrito.CarritoActivity
 import com.project.vivian.cuenta.CuentaFragment
 import com.project.vivian.home.HomeFragment
@@ -33,7 +34,7 @@ class MenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
-        val navView: NavigationView = findViewById(R.id.sidebar_view)
+        //val navView: NavigationView = findViewById(R.id.sidebar_view)
 
         toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.right_sidebar_open, R.string.right_sidebar_close)
         drawerLayout.addDrawerListener(toggle)
@@ -56,8 +57,7 @@ class MenuActivity : AppCompatActivity() {
                     drawerLayout.closeDrawers()
                 }
                 R.id.nav_settings -> {
-                    //startActivity(Intent(this,QRCodeActivity::class.java))
-
+                    startActivity(Intent(this, MapsActivity::class.java))
                 }
                 R.id.nav_logout -> {
                     val builder = AlertDialog.Builder(this)

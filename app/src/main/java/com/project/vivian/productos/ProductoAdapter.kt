@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.vivian.model.Producto
-import com.project.vivian.reservas.MisReservacionesAdapter
 import kotlinx.android.synthetic.main.item_producto.view.*
 
-class ProductoAdapter (val list: List<Producto>, val itemClickListener: ItemClickListener): RecyclerView.Adapter<ProductoViewHolder>() {
+class ProductoAdapter(val list: List<Producto>, val itemClickListener: ProductoFragment): RecyclerView.Adapter<ProductoViewHolder>() {
 
     interface ItemClickListener {
         fun onItemClickMasUno(holder: ProductoViewHolder)

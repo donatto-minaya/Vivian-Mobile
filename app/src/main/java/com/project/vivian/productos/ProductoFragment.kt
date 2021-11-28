@@ -21,13 +21,11 @@ import com.project.vivian.R
 import com.project.vivian.cuenta.CuentaFragment
 import com.project.vivian.home.HomeFragment
 import com.project.vivian.model.Producto
-import com.project.vivian.model.Reserva
 import com.project.vivian.model.Usuario
-import com.project.vivian.reservas.MisReservacionesAdapter
 import kotlinx.android.synthetic.main.dialog_producto.view.*
 import kotlinx.android.synthetic.main.fragment_delivery.*
-import kotlinx.android.synthetic.main.item_producto.*
 import kotlinx.android.synthetic.main.item_producto.view.*
+import kotlin.math.round
 
 class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, ProductoAdapter.ItemClickListener {
 
@@ -37,7 +35,7 @@ class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, Produc
     private val myRefUsuario : DatabaseReference = database.getReference("usuario")
     private val myRefCarrito : DatabaseReference = database.getReference("carrito")
 
-    var listProductos = ArrayList<Producto>();
+    var listProductos = ArrayList<Producto>()
 
     private lateinit var auth: FirebaseAuth
     private lateinit var currentUser : FirebaseUser
@@ -94,7 +92,7 @@ class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, Produc
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val myObject : Usuario? = dataSnapshot.child(currentUser.uid).getValue(Usuario::class.java)
                 if (myObject != null) {
-                    if (myObject.nombres != ""){
+                    if (myObject.dni != ""){
                         return
                     } else {
                         if (context != null){
@@ -198,7 +196,7 @@ class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, Produc
         mDialogView.textNombreProductoDialog.text = producto.nombre
         mDialogView.textDescripcionProductoDialog.text = producto.descripcion
         mDialogView.textCantidadNumeroDialog.text = holder.itemView.textCantidadNumero.text
-        mDialogView.textPrecioNumeroDialog.text = precioTotal.toString()
+        mDialogView.textPrecioNumeroDialog.text = precioTotal.round(2).toString()
 
         mDialogView.button_cancelar_dialog.setOnClickListener {
             mAlertDialog.dismiss()
@@ -208,6 +206,12 @@ class ProductoFragment : Fragment() , AdapterView.OnItemSelectedListener, Produc
             mAlertDialog.dismiss()
         }
 
+    }
+
+    fun Double.round(decimals: Int): Double {
+        var multiplier = 1.0
+        repeat(decimals) { multiplier *= 10 }
+        return round(this * multiplier) / multiplier
     }
 
     fun agregarBuscarItemCarrito(mDialogView : View, producto : Producto){

@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">Vivian</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCB-Mw-V9AONFwh3fGwc8YNJSXkWx_6pD4</string>
     <string name="app_correo">vivian.support@vivian.pe</string>
     <string name="logo_vivian">Logo vivian</string>
     <string name="logo_go_back">Go back</string>
     <string name="btn_cancelar">Cancelar</string>
     <string name="dialog_title">Confirmación</string>
+    <string name="direccion">Puedes encontrarnos en: Ca. Manuel A.Fuentes 853, San Isidro 15046</string>
+    <string name="horario_atencion">Horario de atencion: Lunes a Viernes de 11 a.m. - 11 p.m</string>
+
 
     <!-- Main Activity -->
     <string name="title_inicia_sesion">Inicia Sesión</string>
@@ -36,7 +40,7 @@
     <!-- Left Side Bar -->
     <string name="right_sidebar_cuenta">Cuenta</string>
     <string name="right_sidebar_reservaciones">Mis Reservaciones</string>
-    <string name="right_sidebar_configuracion">Configuración</string>
+    <string name="right_sidebar_configuracion">Acerca</string>
     <string name="right_sidebar_logout">Cerrar Sesión</string>
     <string name="right_sidebar_open">Open</string>
     <string name="right_sidebar_close">Close</string>
@@ -86,5 +90,9 @@
     <string name="title_precio_total">Total: S/</string>
     <string name="btn_carrito_confirmar">¡Confirmar!</string>
     <string name="text_lista_vacia">Tu Carrito está vacío. Puedes llenarlo en cualquier momento :D</string>
+
+    <!-- Fragment Home -->
+    <string name="title_hoy">Hoy</string>
+    <string name="title_productos_platos">Productos Top</string>
 
 </resources>

@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidProjects/dam_curso/Vivian-Mobile/app/src/main/res/layout/activity_main.xml" value="0.23731884057971014" />
+        <entry key="..\:/Users/mauro/AppData/Local/Android/Sdk/platforms/android-30/data/res/layout/simple_spinner_dropdown_item.xml" value="0.28125" />
         <entry key="..\:/Users/mauro/AppData/Local/Android/Sdk/platforms/android-30/data/res/layout/simple_spinner_item.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/drawable/custom_cursor.xml" value="0.3828125" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/drawable/custom_input.xml" value="0.3828125" />
+        <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/drawable/custom_spinner.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/drawable/custome_spinner.xml" value="0.3828125" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/drawable/ic_arrow_drop_down_black_24dp.xml" value="0.3828125" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/drawable/ic_baseline_delete_24_white.xml" value="0.25" />
@@ -16,6 +18,7 @@
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_descripcion_producto.xml" value="0.23385416666666667" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_launcher.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_maps.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_menu.xml" value="0.33" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_menu_bottom.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/activity_registro.xml" value="0.25" />
@@ -29,10 +32,13 @@
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/fragment_mis_reservaciones.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/fragment_reservar.xml" value="0.25" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/item_carrito_compras.xml" value="0.33" />
+        <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/item_news.xml" value="0.2796875" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/item_producto.xml" value="0.33" />
+        <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/item_producto_top.xml" value="0.19427083333333334" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/item_reserva.xml" value="0.33" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/left_sidebar_header.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/qr_code_prueba.xml" value="0.23385416666666667" />
+        <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/recycler_productos_top.xml" value="0.19427083333333334" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/right_sidebar_header.xml" value="0.33" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/spinner_item_mesa.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/spinner_mesa.xml" value="0.2520833333333333" />
@@ -40,6 +46,7 @@
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/layout/subir_imagenes.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/menu/left_side_bar.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/menu/left_sidebar.xml" value="0.2265625" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/menu/right_sidebar.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/menu/right_sidebar_header.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/mauro/OneDrive/Documentos/GitHub Repositories/vivian/Vivian-Mobile/app/src/main/res/menu/rigth_side_bar.xml" value="0.33" />
