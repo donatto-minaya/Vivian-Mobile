@@ -16,6 +16,7 @@ import com.project.vivian.menu.MenuActivity
 import com.project.vivian.model.Mesa
 import com.project.vivian.model.Producto
 import com.project.vivian.model.Usuario
+import com.project.vivian.preferences.Constantes
 import com.project.vivian.reservas.MisReservacionesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -28,18 +29,6 @@ class MainActivity : AppCompatActivity() {
     //private val myRef : DatabaseReference = database.getReference("usuario")
     //private val myRef2 : DatabaseReference = database.getReference("mesa")
 
-    companion object{
-        class MyTask(private val activity: MainActivity ) : AsyncTask<Void, Void, Void>(){
-            override fun doInBackground(vararg p0: Void?): Void? {
-                return null
-            }
-
-            override fun onPreExecute() {
-                activity.progressDialog.show()
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -47,8 +36,6 @@ class MainActivity : AppCompatActivity() {
 
 
         progressDialog = ProgressDialog(this)
-        progressDialog.progress = 10
-        progressDialog.max = 100
         progressDialog.setMessage("Cargando...")
 
         /*val usu = Usuario("asdasd","Ramen","14.99","5")
@@ -76,20 +63,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        if(currentUser != null){
-            reload();
-        }
-    }
 
     private fun signIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    reload()
+                    VivianApp.prefs!!.setBoolean(Constantes.KEY_LOGIN, true)
+                    finish()
+                    startActivity(Intent(this,MenuActivity::class.java))
                 } else {
                     Log.w("TAG", "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Correo o contraseña incorrectos.", Toast.LENGTH_SHORT).show()
@@ -97,11 +78,6 @@ class MainActivity : AppCompatActivity() {
                 progressDialog.dismiss()
             }
     }
-
-    private fun reload(){
-        progressDialog.dismiss()
-        finish()
-        startActivity(Intent(this,MenuActivity::class.java))
-    }
+    
 
 }

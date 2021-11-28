@@ -14,6 +14,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.project.vivian.MainActivity
 import com.project.vivian.QRCodeActivity
 import com.project.vivian.R
+import com.project.vivian.VivianApp
+import com.project.vivian.acerca.MapsActivity
+import com.project.vivian.carrito.CarritoActivity
 import com.project.vivian.cuenta.CuentaFragment
 import com.project.vivian.home.HomeFragment
 import com.project.vivian.productos.ProductoFragment
@@ -31,7 +34,7 @@ class MenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
-        val navView: NavigationView = findViewById(R.id.sidebar_view)
+        //val navView: NavigationView = findViewById(R.id.sidebar_view)
 
         toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.right_sidebar_open, R.string.right_sidebar_close)
         drawerLayout.addDrawerListener(toggle)
@@ -54,17 +57,15 @@ class MenuActivity : AppCompatActivity() {
                     drawerLayout.closeDrawers()
                 }
                 R.id.nav_settings -> {
-                    startActivity(Intent(this,QRCodeActivity::class.java))
-
+                    startActivity(Intent(this, MapsActivity::class.java))
                 }
                 R.id.nav_logout -> {
                     val builder = AlertDialog.Builder(this)
                     builder.setMessage(R.string.dialog_signout_confirm)
                         .setCancelable(false)
                         .setPositiveButton("Si") { dialog, id ->
-                            auth.signOut()
-                            finish()
-                            startActivity(Intent(this, MainActivity::class.java))
+                            VivianApp.prefs!!.clear()
+                            cerrarSesion()
                         }
                         .setNegativeButton("Cancelar") { dialog, id ->
                             dialog.dismiss()
@@ -102,6 +103,11 @@ class MenuActivity : AppCompatActivity() {
 
     }
 
+    fun cerrarSesion(){
+        finish()
+        startActivity(Intent(this, MainActivity::class.java))
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.top_actionbar_menu, menu)
         return true
@@ -110,6 +116,9 @@ class MenuActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)){
             return true
+        }
+        if (item.itemId == R.id.carrito_activity){
+            startActivity(Intent(this,CarritoActivity::class.java))
         }
         return false
     }

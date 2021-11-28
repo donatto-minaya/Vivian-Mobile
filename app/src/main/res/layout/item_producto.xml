@@ -43,8 +43,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imgProducto"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:layout_editor_absoluteY="3dp" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
 
             <TextView
@@ -102,7 +101,7 @@
                 app:layout_constraintStart_toEndOf="@+id/imgProducto"/>
 
             <ImageView
-                android:id="@+id/imgUnoMas"
+                android:id="@+id/imgMasUno"
                 android:layout_width="32dp"
                 android:layout_height="24dp"
                 android:src="@drawable/arrow_up"
@@ -112,13 +111,13 @@
                 app:layout_constraintStart_toEndOf="@+id/textCantidadNumero"/>
 
             <ImageView
-                android:id="@+id/imgUnoMenos"
+                android:id="@+id/imgMenosUno"
                 android:layout_width="32dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="5dp"
                 android:src="@drawable/arrow_down"
                 android:layout_gravity="end|top"
-                app:layout_constraintTop_toBottomOf="@+id/imgUnoMas"
+                app:layout_constraintTop_toBottomOf="@+id/imgMasUno"
                 app:layout_constraintStart_toEndOf="@+id/textCantidadNumero"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
